@@ -1,0 +1,72 @@
+{% from "phase-banner/macro.njk" import govukPhaseBanner %}
+{% from "radios/macro.njk" import govukRadios %}
+{% from "button/macro.njk" import govukButton %}
+{% from "summary-list/macro.njk" import govukSummaryList %}
+{% from "inset-text/macro.njk" import govukInsetText %}
+{% from "warning-text/macro.njk" import govukWarningText %}
+{% from "error-summary/macro.njk" import govukErrorSummary %}
+{% from "footer/macro.njk" import govukFooter %}
+
+{% extends "template.njk" %}
+
+{% block head %}
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-N7JPPRB');</script>
+  <!-- End Google Tag Manager -->
+
+  <meta name="robots" content="noindex, nofollow">
+
+  <link rel="stylesheet" href="/assets/styles/main.css">
+{% endblock %}
+
+{% block pageTitle %}{{ pageTitle }} - {{ locals.serviceName }} - GOV.UK{% endblock %}
+
+{% block bodyStart %}
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N7JPPRB"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+{% endblock %}
+
+{% block header %}
+  <div id="global-cookie-message" style="display: block;">
+    <p>GOV.UK uses cookies to make the site simpler. <a href="https://www.gov.uk/help/cookies" data-module="track-click" data-track-category="cookieBanner" data-track-action="Cookie banner clicked" class="govuk-link">Find out more about cookies</a></p>
+  </div>
+  {{ govukHeader({
+    homepageUrl: "https://www.gov.uk/",
+    containerClasses: "govuk-width-container",
+    serviceName: "Find a DfE approved framework for your school",
+    serviceUrl: "https://www.gov.uk/guidance/find-a-dfe-approved-framework-for-your-school"  
+  }) }}
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukPhaseBanner({
+    tag: {
+      text: "beta"
+    },
+    html: 'This is a new service – your <a class="govuk-link" href="mailto:schools.digital@education.gov.uk?subject=Feedback:%20Find%20a DfE%20approved%20framework%20for%20your%20school">feedback</a> will help us to improve it.'
+  }) }}
+{% endblock %}
+
+{% block footer %}
+  {{ govukFooter({
+    meta: {
+      items: [
+        {
+          href: "https://www.gov.uk/help/cookies",
+          text: "Cookies"
+        }
+      ]
+    }
+  }) }}
+{% endblock %}
+
+{% block bodyEnd %}
+  <script src="/assets/all.js"></script>
+  <script src="/assets/frameworks.js" id="mainscript"></script>
+{% endblock %}

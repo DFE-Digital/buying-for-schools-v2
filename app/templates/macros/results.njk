@@ -1,0 +1,61 @@
+{% from "button/macro.njk" import govukButton %}
+
+{% macro recommendation(title, text) %}
+    <span class="govuk-caption-l">Your recommendation</span>
+    <h1 class="govuk-heading-l govuk-!-margin-bottom-3" id="resulttitle">{{ title }}</h1>
+    <p class="govuk-body-l govuk-!-margin-bottom-6">{{ text }}</p>
+{% endmacro %}
+
+{% macro govBulletList(items) %}
+  <ul class="govuk-list govuk-list--bullet">
+    {% for item in items %}
+      <li>
+        {% if item.pop %}
+          {{ item.shift() }}
+          <ul class="govuk-list govuk-list--bullet">
+            {% for sub in item %}
+              <li>{{ sub | safe }}</li>
+            {% endfor %}  
+          </ul>
+        {% else %}
+          {{ item | safe }}
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+{% endmacro %}
+
+{% macro offers(items, intro) %}
+  <h2 class="govuk-heading-m related-main-content">What it offers</h2>
+  {% if intro %}<p class="govuk-body">{{ intro }}<p>{% endif %}
+  {{ govBulletList(items) }}
+{% endmacro %}
+
+{% macro benefits(items) %}
+  <h2 class="govuk-heading-m">Benefits</h2>
+  {{ govBulletList(items) }}
+{% endmacro %}
+
+{% macro button(text, href) %}
+  {{ govukButton({
+    html: 'Visit the <span id="supplier">' + text + '</span> website',
+    href: href,
+    classes: 'govuk-!-margin-top-5 frameworkbutton--external'
+  }) }}
+{% endmacro %}
+
+{% macro cards(items) %}
+  {% for item in items %}
+    <dl class="card">
+      <a href="{{ item.nextUrl }}"></a>
+      <div class="card__header">
+        <dt class="govuk-visually-hidden">Framework name:</dt>
+        <dd class="card__title">{{ item.title }}</dd>
+      </div>
+      <div class="card__content">
+        <dt>Provider:</dt>
+        <dd>{{ item.supplier }}</dd>
+      </div>
+    </dl>
+  {% endfor %}
+{% endmacro %}

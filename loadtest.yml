@@ -1,0 +1,53 @@
+config:
+  target: 'https://find-dfe-approved-framework.azurewebsites.net'
+  phases:
+    - duration: 60
+      arrivalRate: 20
+#  defaults:
+#    headers:
+#      Authorization: "Basic YnV5aW5nOnNjaG9vbHM="
+scenarios:
+  - flow:
+    - get:
+        url: "/"
+    - get:
+        url: "/assets/styles/main.css"
+    - get:
+        url: "/assets/all.js"
+    - get:
+        url: "/assets/frameworks.js"
+    - think: 5
+    - get:
+        url: "/benefits"
+    - think: 5
+    - get:
+        url: "/selection"
+    - think: 5
+    - get:
+        url: "/service-output"
+    - think: 5
+    - get:
+        url: "/frameworks/"
+    - think: 5
+    - get:
+        url: "/frameworks/type/on-going"
+    - think: 5
+    - get:
+        url: "/frameworks/type/on-going/services-categories/energy"
+    - think: 5
+    - get:
+        url: "/frameworks/type/on-going/services-categories/energy/energy/electricity"
+    - think: 5
+    - get:
+        url: "/frameworks/type/on-going/services-categories/energy/energy/electricity/switching/no"
+    - think: 5
+    - get:
+        url: "/frameworks/type/on-going/services-categories/energy/energy/electricity/switching/no/meter-type/half-hourly"
+    - think: 5
+    - get:
+        url: "/frameworks/type/on-going/services-categories/energy/energy/electricity/switching/no/meter-type/half-hourly/support/specific"
+    - think: 5
+    - get:
+        url: "/frameworks/type/on-going/services-categories/energy/energy/electricity/switching/no/meter-type/half-hourly/support/specific"
+
+

@@ -1,0 +1,174 @@
+{
+  "_id" : "5d405257dbd3a305fbc91e2f",
+  "status" : "DRAFT",
+  "framework" : [
+    {
+      "_id" : "5d405257dbd3a305fbc91e51",
+      "provider" : "5d405257dbd3a305fbc91ec6",
+      "cat" : "5d405257dbd3a305fbc91ebb",
+      "ref" : "books",
+      "title" : "Books and related materials",
+      "url" : "https://www.espo.org/Pages/Books-for-schools-framework-376E-guide",
+      "descr" : "Deals for curriculum materials including fiction and non-fiction books, ebooks, DVDs, CDs and education software.",
+      "expiry" : {
+        "$date" : 1598832000000
+      }
+    },
+    {
+      "_id" : "5d405257dbd3a305fbc91e50",
+      "provider" : "5d405257dbd3a305fbc91ec5",
+      "cat" : "5d405257dbd3a305fbc91ebb",
+      "ref" : "library",
+      "title" : "Library resources",
+      "url" : "https://www.academies.thecpc.ac.uk/suppliers/categories/framework.php?categoryID=6&frameworkID=177",
+      "descr" : "Includes the provision of books, e-books, journals/ periodicals, e-journals, audio books, audio summary, library discovery and associated services split into 4 lots with 12 suppliers. Curriculum books are also available via this deal.",
+      "expiry" : {
+        "$date" : 1596844800000
+      }
+    },
+    {
+      "_id" : "5d405257dbd3a305fbc91e4f",
+      "provider" : "5d405257dbd3a305fbc91ec4",
+      "cat" : "5d405257dbd3a305fbc91eb9",
+      "ref" : "furniture",
+      "title" : "Furniture",
+      "url" : "https://www.nepo.org/solutions/furniture",
+      "descr" : "This is a multi-supplier, multi-lot solution which provides a compliant solution for the furniture across a variety of school settings.The deal is split into 3 lots: office, educational and residential/domestic furniture.",
+      "expiry" : {
+        "$date" : 1614470400000
+      }
+    }
+  ],
+  "question" : [
+    {
+      "_id" : "5d405257dbd3a305fbc91eb1",
+      "ref" : "type",
+      "title" : "What are you buying?",
+      "err" : "Select if you are buying goods or services",
+      "hint" : "",
+      "suffix" : "",
+      "options" : [
+        {
+          "_id" : "5d405257dbd3a305fbc91eb3",
+          "next" : "5d405257dbd3a305fbc91ead",
+          "result" : [ ],
+          "ref" : "buying",
+          "title" : "Goods",
+          "hint" : ""
+        },
+        {
+          "_id" : "5d405257dbd3a305fbc91eb2",
+          "next" : "5d405257dbd3a305fbc91e94",
+          "result" : [ ],
+          "ref" : "on-going",
+          "title" : "Services",
+          "hint" : ""
+        }
+      ]
+    },
+    {
+      "_id" : "5d405257dbd3a305fbc91ead",
+      "ref" : "what",
+      "title" : "What goods do you need?",
+      "err" : "Select which goods you need",
+      "hint" : "",
+      "suffix" : "",
+      "options" : [
+        {
+          "_id" : "5d405257dbd3a305fbc91eb0",
+          "next" : "5d405257dbd3a305fbc91eaa",
+          "result" : [ ],
+          "ref" : "books-media",
+          "title" : "Books and related materials",
+          "hint" : ""
+        },
+        {
+          "_id" : "5d405257dbd3a305fbc91eaf",
+          "result" : [
+            "5d405257dbd3a305fbc91e4f"
+          ],
+          "ref" : "furniture",
+          "title" : "Furniture",
+          "hint" : ""
+        },
+        {
+          "_id" : "5d405257dbd3a305fbc91eae",
+          "next" : "5d405257dbd3a305fbc91ea5",
+          "result" : [ ],
+          "ref" : "ict",
+          "title" : "ICT",
+          "hint" : ""
+        }
+      ]
+    },
+    {
+      "_id" : "5d405257dbd3a305fbc91eaa",
+      "ref" : "class-library",
+      "title" : "What goods are you looking for in books and related materials?",
+      "err" : "Select which goods you are looking for",
+      "hint" : "",
+      "suffix" : "",
+      "options" : [
+        {
+          "_id" : "5d405257dbd3a305fbc91eac",
+          "result" : [
+            "5d405257dbd3a305fbc91e51"
+          ],
+          "ref" : "classroom",
+          "title" : "Classroom supplies",
+          "hint" : ""
+        },
+        {
+          "_id" : "5d405257dbd3a305fbc91eab",
+          "result" : [
+            "5d405257dbd3a305fbc91e50"
+          ],
+          "ref" : "library",
+          "title" : "Library supplies",
+          "hint" : ""
+        }
+      ]
+    }
+  ],
+  "category" : [
+    {
+      "_id" : "5d405257dbd3a305fbc91ebb",
+      "title" : "Books and related materials"
+    },
+    {
+      "_id" : "5d405257dbd3a305fbc91eb9",
+      "title" : "Facilities management and estates"
+    }
+  ],
+  "provider" : [
+    {
+      "_id" : "5d405257dbd3a305fbc91ec6",
+      "initials" : "ESPO",
+      "title" : "Eastern Shires Purchasing Organisation"
+    },
+    {
+      "_id" : "5d405257dbd3a305fbc91ec4",
+      "initials" : "NEPO",
+      "title" : "North East Procurement Organisation"
+    }
+  ],
+  "createdAt" : {
+    "$date" : 1564496471145
+  },
+  "updatedAt" : {
+    "$date" : 1564584027668
+  },
+  "__v" : 1,
+  "published" : {
+    "date" : {
+      "$date" : 1564570887333
+    },
+    "note" : "Note note note"
+  },
+  "archived" : {
+    "date" : {
+      "$date" : 1564584027074
+    },
+    "note" : "Archived in favour of: Testing the archiving of LIVE files"
+  }
+}

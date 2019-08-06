@@ -1,0 +1,42 @@
+{% extends "buying-for-schools.njk" %}
+
+{# Adds a class to increase vertical spacing for pages without a back button #}
+{% set mainClasses = "govuk-main-wrapper--l" %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
+      <div class="flash-card">
+        <h1 class="govuk-heading-xl govuk-!-margin-bottom-7">Benefits of using a framework</h1>
+
+        <p class="govuk-body">You can use frameworks without having to run a full buying process.</p>
+
+        <p class="govuk-body">Each framework agreement has:</p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>details of products, services and suppliers available</li>
+          <li>an agreed pricing structure and terms and conditions</li>
+          <li>guidance on how to buy</li>
+        </ul>
+
+        <p class="govuk-body">Buying from a framework can be quicker and easier than getting bids or quotes because the agreements:</p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>have already been through a full competitive tender process</li>
+          <li>have been quality checked</li>
+          <li>are checked to make sure they comply with the law</li>
+          <li>may have draft specifications and help available</li>
+        </ul>
+
+
+
+        {{ govukButton({
+            text: 'Continue',
+            href: '/selection',
+            classes: 'govuk-!-margin-bottom-0'
+        }) }}
+
+      </div>
+
+    </div>
+  </div>
+{% endblock %}

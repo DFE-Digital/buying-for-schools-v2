@@ -1,0 +1,125 @@
+@import "node_modules/govuk-frontend/all";
+
+@import "./components/flash-card";
+@import "./components/cards";
+@import "./components/collection";
+@import "./components/search";
+@import "./components/markdown";
+
+.govuk-summary-list__key, .govuk-summary-list__value {
+  word-break: break-word;
+}
+
+.summary {
+  position: relative;
+}
+
+.start-again {
+  position: absolute;
+  top: 2px;
+  right: 0;
+}
+
+.govuk-list--dash {
+  li {
+    margin-left: 30px;
+    position: relative;
+    &:before {
+      position: absolute;
+      content: '—';
+      left: -30px;
+
+    }
+  }
+}
+
+@media (min-width: 40.0625em) {
+  .govuk-summary-list__key {
+    width: 40%;
+  }
+}
+
+.text-right {
+  text-align: right;
+}
+
+.secondary-text {
+  color: $govuk-secondary-text-colour;
+}
+
+.govuk-summary-list__row {
+  font-weight: normal;
+  font-size: 16px;
+}
+
+.govuk-summary-list__key {
+  font-weight: normal;
+}
+
+// Updated related content to match new gov styles
+.app-related-items--small {
+  border-top: 2px solid #005ea5;
+  padding-top: 15px;
+
+  h3 {
+    border-top: 1px solid #bfc1c3;
+    padding: 15px 0 0;
+    margin: 30px 0 10px;
+  }
+}
+.related-main-content {
+  border-top: 1px solid #bfc1c3;
+  padding-top: 20px;
+}
+
+
+.cta-box {
+  margin: 2em 0;
+  background-color: #dee0e2;
+  padding: 2em;
+
+  p:last-child,
+  ul:last-child,
+  ol:last-child {
+    margin-bottom: 0;
+  }
+}
+
+#global-cookie-message {
+
+  width: 100%;
+  background-color: #d5e8f3;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+  p {
+    font-family: "nta", Arial, sans-serif;
+    font-weight: 400;
+    text-transform: none;
+    font-size: 14px;
+    line-height: 1.14286;
+    margin: 0 30px;
+    max-width: 960px;
+
+    @media (min-width: 641px) {
+      font-size: 16px;
+      line-height: 1.25;
+    }
+
+    @media (min-width: 1024px) {
+      margin: 0 auto;
+    }
+  }
+}
+
+.govuk-table__cell--supplier {
+  width: 60px;
+  @media (min-width: 40.0625em) {
+    width: 100px;
+  }
+}
+
+abbr[title], acronym[title] {
+  text-decoration: none;
+  cursor: help;
+}

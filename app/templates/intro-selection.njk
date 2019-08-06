@@ -1,0 +1,27 @@
+{% extends "buying-for-schools.njk" %}
+
+{# Adds a class to increase vertical spacing for pages without a back button #}
+{% set mainClasses = "govuk-main-wrapper--l" %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
+      <div class="flash-card">
+        <h1 class="govuk-heading-xl govuk-!-margin-bottom-7">How frameworks are selected</h1>
+
+        <p class="govuk-body">The Schools Commercial Team (SCT) within DfE reviews a range of frameworks. These frameworks are assessed for compliance with procurement regulations, ease of use, suitability and value for money. Feedback from schools is also considered when selecting frameworks.</p>
+
+        <p class="govuk-body">SCT continues to review and add to the list of recommended frameworks.</p>
+
+        {{ govukButton({
+            text: 'Continue',
+            href: '/service-output',
+            classes: 'govuk-!-margin-bottom-0'
+        }) }}
+
+      </div>
+
+    </div>
+  </div>
+{% endblock %}

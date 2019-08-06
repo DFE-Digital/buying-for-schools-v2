@@ -1,0 +1,42 @@
+{% extends "result.njk" %}
+{% import "macros/results.njk" as results %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    {% block recommendation %}
+      <span class="govuk-caption-l">Your recommendation</span>
+      <h1 class="govuk-heading-l govuk-!-margin-bottom-3" id="resulttitle">{{ title }}</h1>
+      <p class="govuk-body-l govuk-!-margin-bottom-6">Based on your answers, we think you should use the {{ providerFull }} framework.</p>
+    {% endblock %}
+  </div>
+
+  <div class="govuk-grid-column-two-thirds">
+    <div class="govuk-markdown">
+      {{ body | safe }}
+    </div>
+
+    <p class="govuk-body">All frameworks also offer:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>compliance with The Official Journal of the European Union (OJEU) principles and regulations</li>
+      <li>a list of checked suppliers</li>
+      <li>pre-agreed terms and conditions</li>
+    </ul>
+
+    {{ results.button(providerShort, url) }}
+
+
+    {% include "summary.njk" %}
+  </div>
+
+  <div class="govuk-grid-column-one-third">
+    <aside class="app-related-items app-related-items--small" role="complementary">
+      {% include "includes/framework-aside.njk" %}
+      {% block asideextra %}
+      {% endblock %}
+    </aside>
+  </div>
+
+</div>
+
+{% endblock %}

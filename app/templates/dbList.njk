@@ -1,0 +1,59 @@
+{% extends "buying-for-schools.njk" %}
+{% import "macros/results.njk" as results %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <span class="govuk-caption-l">DfE approved</span>
+    <h1 class="govuk-heading-l govuk-!-margin-bottom-3">All frameworks</h1>
+    <p class="govuk-body">The Schools Commercial Team (SCT) within DfE reviews a range of frameworks. These frameworks are assessed for compliance with procurement regulations, ease of use, suitability and value for money. Feedback from schools is also considered when selecting frameworks.</p>
+
+    <p class="govuk-body">SCT continues to review and add to the list of recommended frameworks.</p>
+
+  </div>
+</div>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-one-quarter">
+    <div class="app-related-items--small">
+      <nav role="navigation" aria-label="Pages in this guide">
+        <h2 class="govuk-body-s govuk-!-margin-bottom-0">Contents</h2>
+
+        <ol class="govuk-list govuk-list--dash">
+          {% for group in grouped %}
+            <li>
+              <a class="govuk-body-s govuk-link" href="#category-{{ group.ref }}">{{ group.title }}</a>
+            </li>
+          {% endfor %}
+        </ol>
+      </nav>
+    </div>
+  </div>
+  <div class="govuk-grid-column-three-quarters">
+    <div class="related-main-content">
+      {% for group in grouped %}
+        <h2 class="govuk-heading-m" id="category-{{ group.ref }}">{{ group.title }}</h2>
+        <table class="govuk-table">
+          {% for item in group.items %}
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">
+                <a href="/list/{{ item.ref }}" class="govuk-link" id="{{ item.ref }}">{{ item.title }}</a>
+                <p class="govuk-body-s govuk-!-margin-bottom-1">{{ item.descr }}</p>
+                {% if item.expiry %}<p class="govuk-body-xs govuk-!-margin-bottom-0 govuk-!-padding-bottom-0">Expires: {{ item.expiry }}</p>{% endif %}
+              </td>
+              <td class="govuk-table__cell govuk-table__cell--supplier">{{ item.supplier }}</td>
+            </tr>
+          {% endfor %}
+        </table>
+      {% endfor %}
+      {{ govukButton({
+        text: "Find a framework",
+        href: "/",
+        classes: "govuk-button--start govuk-!-margin-top-2 govuk-!-margin-bottom-8"
+      }) }}
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "buying-for-schools.njk" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-l govuk-!-margin-bottom-3">Matching frameworks</h1>
+    <p class="govuk-body-l govuk-!-margin-bottom-6">Based on your answers, there are multiple approved frameworks to choose from.</p>
+
+    {% for item in resultList %}
+      <dl class="card">
+        <a href="{{ item.url }}"></a>
+        <div class="card__header">
+          <dt class="govuk-visually-hidden">Framework name:</dt>
+          <dd class="card__title">{{ item.title }}</dd>
+        </div>
+        <div class="card__content">
+          <dt>Provider:</dt>
+          <dd>{{ item.supplier }}</dd>
+        </div>
+      </dl>
+    {% endfor %}
+
+    {% include "summary.njk" %}
+  </div>
+</div>
+
+{% endblock %}

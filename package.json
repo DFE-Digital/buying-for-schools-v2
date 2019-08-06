@@ -1,0 +1,67 @@
+{
+  "name": "buying-for-schools",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app/index.js",
+    "start:dev": "gulp watch",
+    "start:testing": "jest --watchAll --coverage",
+    "test": "npm run test:jest && npm run test:bdd && npm run test:jshint",
+    "test:jshint": "jshint app/**/*.js",
+    "test:jest": "jest --coverage",
+    "test:bdd": "./node_modules/.bin/cucumber-js -f node_modules/cucumber-pretty --exit",
+    "test:load": "artillery run loadtest.yml -o loadtest-report.json",
+    "test:loadreport": "artillery report loadtest-report.json",
+    "test:db": "nyc mocha app/dbTree/tests/*.test.js --exit"
+  },
+  "jshintConfig": {
+    "asi": true,
+    "esversion": 9,
+    "maxcomplexity": 7
+  },
+  "jest": {
+    "testResultsProcessor": "./node_modules/jest-junit-reporter",
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/app/dbTree"
+    ]
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-basic-auth": "^1.2.0",
+    "govuk-frontend": "^2.13.0",
+    "gulp": "^4.0.2",
+    "gulp-cli": "^2.2.0",
+    "gulp-copy": "^4.0.1",
+    "marked": "^0.7.0",
+    "mkdirp": "^0.5.1",
+    "moment": "^2.24.0",
+    "mongodb": "^3.3.0-beta2",
+    "nunjucks": "^3.1.7",
+    "sass": "^1.22.5",
+    "serve-static": "^1.14.1"
+  },
+  "optionalDependencies": {
+    "fsevents": "^1.2.7",
+    "puppeteer": "^1.13.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "cucumber": "^5.1.0",
+    "cucumber-pretty": "^1.5.2",
+    "gulp-jest": "^4.0.2",
+    "gulp-nodemon": "^2.4.2",
+    "jest": "^24.8.0",
+    "jest-cli": "^24.8.0",
+    "jest-junit-reporter": "^1.1.0",
+    "jshint": "^2.10.1",
+    "mocha": "^6.2.0",
+    "nyc": "^14.1.1",
+    "sinon": "^7.3.2",
+    "standard": "^13.1.0"
+  }
+}

@@ -1,0 +1,86 @@
+.card {
+  position: relative;
+  width: 100%;
+  background-color: govuk-colour("grey-4");
+  border: 1px solid $govuk-border-colour;
+  margin-bottom: govuk-spacing(3);
+}
+
+.card:hover {
+  border-color: $govuk-link-colour;
+  box-shadow: inset 0 0 0 1px $govuk-link-colour;
+}
+
+.card > a {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 0;
+}
+
+.card > a:focus {
+  background-color: initial !important;
+}
+
+.card__header {
+  padding: govuk-spacing(4) govuk-spacing(4) govuk-spacing(1);
+}
+
+.card__content {
+  padding: 0 govuk-spacing(4) govuk-spacing(4);
+}
+
+.card__header,
+.card__content {
+  &::after {
+    clear: both;
+    content: ' ';
+    display: block;
+  }
+}
+
+.card .card__title {
+  @include govuk-font($size: 24, $weight: bold);
+  color: $govuk-link-colour;
+}
+
+.card dt,
+.card dd {
+  float: left;
+  @include govuk-text-colour;
+  @include govuk-font($size: 19);
+  margin: 0 govuk-spacing(1) 0 0;
+  padding: 0;
+
+  @media(max-width: 670px) {
+    float: none;
+    margin: 0;
+  }
+}
+
+.card dt {
+  font-weight: bold;
+}
+
+.card dd {
+  margin-right: govuk-spacing(5);
+
+  @media(max-width: 670px) {
+    margin-bottom: 20px;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+}
+
+
+.card p {
+  margin-bottom: 0;
+}
+
+.card p + p {
+  margin-top: govuk-spacing(4);
+}

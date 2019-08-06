@@ -1,0 +1,33 @@
+.document__list {
+
+}
+
+.document__listitem { 
+  margin: 10px 0;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #bfc1c3;
+
+  &:last-child {
+    border-bottom: none;    
+  }
+}
+
+.document__title {
+  display: block;
+  font-size: 19px;
+  font-weight: bold;
+}
+
+.document__metadata {
+  display: inline-block;
+  font-size: 14px;
+  margin: 0;
+}
+
+.document__metadata--date {
+
+}
+
+.document__metadata--type {
+  margin-left: 20px;
+}
