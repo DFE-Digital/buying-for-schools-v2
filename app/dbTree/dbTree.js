@@ -53,7 +53,7 @@ const dbTree = app => {
     res.locals.pairs = pairs
 
     let doc
-    db.getRecord('DRAFT')
+    db.getRecord()
       .then(d => doc = d)
       .then(() => pairs.map(p => utils.getPair(doc, p)))
       .then(pairDetail => {

@@ -9,7 +9,7 @@ const dbList = app => {
   me.dbTreeFramework = require('./dbTreeFramework')(app)
 
   me.frameworkListPage = () => {
-    return db.getRecord('DRAFT')
+    return db.getRecord()
       .then(doc => {
         const categories = doc.category.map(c => {
           const frameworks = doc.framework.filter(f => f.cat.toString() === c._id.toString())
@@ -26,7 +26,7 @@ const dbList = app => {
   }
 
   me.frameworkPage = ref => {
-    return db.getRecord('DRAFT')
+    return db.getRecord()
       .then(doc => {
         const framework = doc.framework.find(f => f.ref === ref)
         return me.dbTreeFramework(db.populateFramework(doc, framework))

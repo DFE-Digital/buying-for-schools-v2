@@ -42,6 +42,12 @@
     serviceName: "Find a DfE approved framework for your school",
     serviceUrl: "https://www.gov.uk/guidance/find-a-dfe-approved-framework-for-your-school"  
   }) }}
+
+  {% if locals.db.docStatus === 'LIVE' %}
+    <span class="docstatus docstatus--live" aria-hidden="true">{{ locals.db.docStatus }}</span>
+  {% else %}
+    <span class="docstatus">{{ locals.db.docStatus }}</span>
+  {% endif %}
 {% endblock %}
 
 {% block beforeContent %}

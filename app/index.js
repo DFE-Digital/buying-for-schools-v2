@@ -31,7 +31,11 @@ app.use((req, res, next) => {
 
 const routeIntroPages = require('./routeIntroPages').route(app)
 
-app.locals.db = require('./dbTree/db')(process.env.S107D01_MONGO_01_READONLY || process.env.MONGO_READONLY, 's107d01-mongo-01')
+app.locals.db = require('./dbTree/db')({
+  connectionString: process.env.S107D01_MONGO_01_READONLY || process.env.MONGO_READONLY,
+  dbName: 's107d01-mongo-01',
+  docStatus: process.env.DOC_STATUS || 'LIVE'
+})
 const dbTree = require('./dbTree/dbTree')(app)
 const dbList = require('./dbTree/dbList')(app)
 app.use(frameworkPath, dbTree.handleRequest)

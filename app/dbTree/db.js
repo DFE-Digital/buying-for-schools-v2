@@ -1,15 +1,17 @@
 const mongoDB = require('mongodb')
 const mClient = mongoDB.MongoClient
 
-const dbFunc = (connectionString, dbName) => {
+const dbFunc = options => {
+  const { connectionString, dbName, docStatus } = options
   const client = new mClient(connectionString, { useNewUrlParser: true })
   const dbObj = {}
+  dbObj.docStatus = docStatus
   dbObj.connected = client.connect()
     .then(() => client.db(dbName))
     .then(connection => dbObj.structures = connection.collection('structures'))
     .then(() => console.log('connection made'))
 
-  dbObj.getRecord = (status) => {
+  dbObj.getRecord = (status = docStatus) => {
     return dbObj.structures.findOne({ status }, { sort: { updatedAt: -1 } })
   }
 
