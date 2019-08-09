@@ -27,7 +27,7 @@ const dbFunc = require('../db')
 describe('db', () => {
   let dbObj
   before(done => {
-    dbObj = dbFunc('mongoURI', 'mydbname')
+    dbObj = dbFunc({ connectionString: 'mongoURI', dbName: 'mydbname', docStatus: 'DRAFT' })
     dbObj.connected.then(() => done())
   })
 

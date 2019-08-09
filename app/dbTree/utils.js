@@ -64,9 +64,23 @@ const getQuestionAnswerSummary = (pairDetail, baseUrl) => {
   return summary
 }
 
+const getProviderFull = provider => {
+  if (provider.initials === provider.title || !provider.initials || !provider.initials.trim()) {
+    return provider.title
+  }
+
+  return `${provider.title} (${provider.initials})`
+}
+
+const getProviderShort = provider => {
+  return provider.initials && provider.initials.trim() ? provider.initials : provider.title
+}
+
 module.exports = {
   sortBy,
   getQuestionAnswerPairSlugs,
   getPair,
-  getQuestionAnswerSummary
+  getQuestionAnswerSummary,
+  getProviderFull,
+  getProviderShort
 }

@@ -106,4 +106,39 @@ describe('utils', () => {
       })
     })
   })
+
+  describe('getProviderFull', () => {
+    it('should get a complete provider name and initials', () => {
+      const testProvider = {
+        initials: 'ESPO',
+        title: 'Eastern Shires Purchasing Organisation'
+      }
+      expect(utils.getProviderFull(testProvider)).to.equal('Eastern Shires Purchasing Organisation (ESPO)')
+    })
+
+    it('should just return the title if the initials are blank', () => {
+      const testProvider = {
+        title: 'Eastern Shires Purchasing Organisation'
+      }
+      expect(utils.getProviderFull(testProvider)).to.equal('Eastern Shires Purchasing Organisation')
+    })
+  })
+
+  describe('getProviderShort', () => {
+    it('should return just the initials', () => {
+      const testProvider = {
+        initials: 'ESPO',
+        title: 'Eastern Shires Purchasing Organisation'
+      }
+      expect(utils.getProviderShort(testProvider)).to.equal('ESPO')
+    })
+
+    it('should return just the title if there are no initials', () => {
+      const testProvider = {
+        initials: '',
+        title: 'Eastern Shires Purchasing Organisation'
+      }
+      expect(utils.getProviderShort(testProvider)).to.equal('Eastern Shires Purchasing Organisation')
+    })
+  })
 })

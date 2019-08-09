@@ -3,9 +3,8 @@ const path = require('path')
 const utils = require('./utils')
 
 const dbTree = app => {
-  const db = app.locals.db
   const me = {}
-
+  me.db = app.locals.db
   me.dbTreeQuestion = require('./dbTreeQuestion')(app)
   me.dbTreeFramework = require('./dbTreeFramework')(app)
   me.dbTreeMultiple = require('./dbTreeMultiple')(app)
@@ -53,7 +52,7 @@ const dbTree = app => {
     res.locals.pairs = pairs
 
     let doc
-    db.getRecord()
+    return me.db.getRecord()
       .then(d => doc = d)
       .then(() => pairs.map(p => utils.getPair(doc, p)))
       .then(pairDetail => {
@@ -63,14 +62,16 @@ const dbTree = app => {
         res.locals.summary = utils.getQuestionAnswerSummary(pairDetail, req.baseUrl)
 
         if (!lastPairDetail.question) {
-        // look for a single recommendation
+          // look for a single recommendation
           return doc.framework.find(f => f.ref === lastPair[0])
         }
         if (lastPairDetail.question && lastPairDetail.answer) {
-        // if there are recommendations at the end of the chain
+          // if there are recommendations at the end of the chain
           if (lastPairDetail.answer.next) {
+            // next question
             return doc.question.find(q => q._id.toString() === lastPairDetail.answer.next.toString())
           } else {
+            // results
             return doc.framework.filter(f => lastPairDetail.answer.result.includes(f._id.toString()))
           }
         }
@@ -81,14 +82,14 @@ const dbTree = app => {
           res.locals.frameworkDetails = []
         } else {
           const frameworks = nextDetails && nextDetails._id ? [nextDetails] : nextDetails
-          res.locals.frameworkDetails = frameworks.map(f => db.populateFramework(doc, f))
+          res.locals.frameworkDetails = frameworks.map(f => me.db.populateFramework(doc, f))
         }
 
         me.render(req, res)
       })
       .catch(err => {
         console.log('err', err)
-        res.send(res.locals)
+        res.send(err)
       })
   }
 
