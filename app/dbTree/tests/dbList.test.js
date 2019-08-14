@@ -1,13 +1,11 @@
+/* global describe it before */
+
 const chai = require('chai')
 const expect = chai.expect
 const chaiAsPromised = require('chai-as-promised')
 chai.use(chaiAsPromised)
-
+const sinon = require('sinon')
 const nunjucks = require('nunjucks')
-nunjucks.render = (njk, props) => {
-  return { template: njk, props }
-}
-
 const dbList = require('../dbList')
 
 const testStructure = require('./data/structure.json')
@@ -19,6 +17,20 @@ const mockDB = {
     modifiedFramework.cat = doc.category.find(c => c._id.toString() === f.cat.toString())
     return modifiedFramework
   }
+}
+
+const getRes = () => {
+  const me = {
+    status: sinon.spy(() => me),
+    send: sinon.spy(),
+    redirect: sinon.spy(),
+    locals: {
+      summary: 'testSummary',
+      frameworkDetails: [],
+      nextDetails: null
+    }
+  }
+  return me
 }
 
 describe('dbList', () => {
@@ -37,66 +49,81 @@ describe('dbList', () => {
 
   describe('handleRequest', () => {
     it('should call frameworkListPage when the url is /', done => {
-      const initialised = dbList({ locals: {} })
-      initialised.frameworkListPage = () => Promise.resolve('listpage')
-      initialised.handleRequest({
-        url: '/'
-      }, {
-        send: content => {
-          expect(content).equal('listpage')
+      const testRes = getRes()
+      const initialised = dbList({ locals: { db: mockDB } })
+      initialised.frameworkListPage = sinon.spy(() => 'frameworkListPage')
+      initialised.handleRequest({ url: '/' }, testRes)
+        .finally(() => {
+          expect(initialised.frameworkListPage.called).to.be.true
+          expect(testRes.send.called).to.be.true
+          expect(testRes.send.lastCall.args[0]).to.equal('frameworkListPage')
           done()
-        }
-      })
+        })
     })
 
-    it('should call frameworkPage when the url is /${frameworkref}', done => {
-      const initialised = dbList({ locals: {} })
-      initialised.frameworkPage = (ref) => Promise.resolve(`frameworkpage ${ref}`)
-      initialised.handleRequest({
-        url: '/books'
-      }, {
-        send: content => {
-          expect(content).equal('frameworkpage books')
+    it('should call frameworkPage when the url is /frameworkref', done => {
+      const testRes = getRes()
+      const initialised = dbList({ locals: { db: mockDB } })
+      initialised.frameworkPage = sinon.spy(() => 'frameworkPage')
+      initialised.handleRequest({ url: '/books' }, testRes)
+        .finally(() => {
+          expect(initialised.frameworkPage.called).to.be.true
+          expect(testRes.send.called).to.be.true
+          expect(testRes.send.lastCall.args[0]).to.equal('frameworkPage')
           done()
-        }
-      })
+        })
     })
 
-    it('should handle an error in frameworkListPage', done => {
-      const initialised = dbList({ locals: {} })
-      initialised.frameworkListPage = () => Promise.reject('error')
-      initialised.handleRequest({
-        url: '/'
-      }, {
-        send: content => {
-          expect(content).equal('error')
+    it('should 404 when url requests framework which does not exist', done => {
+      const testRes = getRes()
+      const initialised = dbList({ locals: { db: mockDB } })
+      nunjucks.render = sinon.spy()
+      initialised.handleRequest({ url: '/xxx' }, testRes)
+        .finally(() => {
+          expect(testRes.status.called).to.be.true
+          expect(testRes.status.lastCall.args[0]).to.equal(404)
+          expect(testRes.send.called).to.be.true
           done()
-        }
-      })
+        })
     })
 
-    it('should handle an error in frameworkPage', done => {
-      const initialised = dbList({ locals: {} })
-      initialised.frameworkPage = () => Promise.reject('error')
-      initialised.handleRequest({
-        url: '/acme'
-      }, {
-        send: content => {
-          expect(content).equal('error')
-          done()
-        }
-      })
-    })
+    // it('should handle an error in frameworkListPage', done => {
+    //   const initialised = dbList({ locals: {} })
+    //   initialised.frameworkListPage = () => Promise.reject('error')
+    //   initialised.handleRequest({
+    //     url: '/'
+    //   }, {
+    //     send: content => {
+    //       expect(content).equal('error')
+    //       done()
+    //     }
+    //   })
+    // })
+
+    // it('should handle an error in frameworkPage', done => {
+    //   const initialised = dbList({ locals: {} })
+    //   initialised.frameworkPage = () => Promise.reject('error')
+    //   initialised.handleRequest({
+    //     url: '/acme'
+    //   }, {
+    //     send: content => {
+    //       expect(content).equal('error')
+    //       done()
+    //     }
+    //   })
+    // })
   })
 
   describe('frameworkListPage', () => {
     const initialised = dbList({ locals: { db: mockDB } })
     let testRender
-    before(done => {
-      initialised.frameworkListPage().then(results => {
-        testRender = results
-        done()
-      })
+    before(() => {
+      nunjucks.render = sinon.spy()
+      initialised.frameworkListPage(testStructure)
+      testRender = {
+        template: nunjucks.render.lastCall.args[0],
+        props: nunjucks.render.lastCall.args[1]
+      }
     })
     it('should try to render dbList.njk', () => {
       expect(testRender.template).to.equal('dbList.njk')
@@ -129,23 +156,20 @@ describe('dbList', () => {
   })
 
   describe('frameworkPage', () => {
-    const initialised = dbList({ locals: { db: mockDB } })
-    let attemptingToRenderFramework
-    before(done => {
-      initialised.dbTreeFramework = framework => framework
-      initialised.frameworkPage('furniture').then(results => {
-        attemptingToRenderFramework = results
-        done()
-      })
+    it('should try to render a specific framework', () => {
+      const initialised = dbList({ locals: { db: mockDB } })
+      initialised.dbTreeFramework = sinon.spy(f => f)
+      initialised.frameworkPage(testStructure, 'furniture')
+      const testRender = initialised.dbTreeFramework.lastCall.args[0]
+      expect(testRender.ref).to.equal('furniture')
+      expect(testRender.title).to.equal('Furniture')
+      expect(testRender.cat).to.have.property('title', 'Facilities management and estates')
+      expect(testRender.provider).to.have.property('title', 'North East Procurement Organisation')
     })
 
-    it('should try to render a specific framework', () => {
-      expect(attemptingToRenderFramework.ref).to.equal('furniture')
-      expect(attemptingToRenderFramework.title).to.equal('Furniture')
-      expect(attemptingToRenderFramework.cat).to.have.property('title', 'Facilities management and estates')
-      expect(attemptingToRenderFramework.provider).to.have.property('title', 'North East Procurement Organisation')
-      // expect(testRender.template).to.equal('dbTreeFramework.njk')
-      // expect(testRender.props.pageTitle).to.equal('Books and related materials')
+    it('should return null if trying to render a framework which does not exist', () => {
+      const initialised = dbList({ locals: { db: mockDB } })
+      expect(initialised.frameworkPage(testStructure, 'xxx')).to.be.null
     })
   })
 })

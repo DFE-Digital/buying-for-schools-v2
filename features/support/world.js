@@ -1,3 +1,5 @@
+process.env.AUTHUSER = ''
+process.env.AUTHPASS = ''
 const { server } = require('../../app/index')
 
 const { setWorldConstructor, AfterAll } = require('cucumber')
@@ -18,7 +20,7 @@ class B4SWorld {
 
   async gotoPage (u) {
     if (!browser) {
-      browser = await puppeteer.launch()
+      browser = await puppeteer.launch({ headless: false })
     }
 
     if (!page) {
@@ -108,10 +110,8 @@ class B4SWorld {
 }
 
 AfterAll(async function () {
-  // console.log('START: AfterAll')
   await browser.close()
   await server.close()
-  // console.log('END: AfterAll')
 })
 
 setWorldConstructor(B4SWorld)

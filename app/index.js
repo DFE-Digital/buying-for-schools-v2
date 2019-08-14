@@ -32,7 +32,7 @@ app.use((req, res, next) => {
 const routeIntroPages = require('./routeIntroPages').route(app)
 
 app.locals.db = require('./dbTree/db')({
-  connectionString: process.env.S107D01_MONGO_01_READONLY || process.env.MONGO_READONLY,
+  connectionString: process.env.MONGO_READONLY,
   dbName: 's107d01-mongo-01',
   docStatus: process.env.DOC_STATUS || 'LIVE'
 })
@@ -49,8 +49,10 @@ app.get('*', (req, res) => {
 
 const server = app.listen(port, () => {
   console.log('Magic happens on port ' + port)
+  console.log(app.locals.db.docStatus)
 })
 
 module.exports = {
-  server
+  server,
+  app
 }

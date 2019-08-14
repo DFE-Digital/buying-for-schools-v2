@@ -7,13 +7,12 @@
     "start": "node app/index.js",
     "start:dev": "gulp watch",
     "start:testing": "jest --watchAll --coverage",
-    "test": "npm run test:jest && npm run test:bdd && npm run test:jshint",
+    "test": "npm run test:mocha && npm run test:bdd && npm run test:jshint",
     "test:jshint": "jshint app/**/*.js",
-    "test:jest": "jest --coverage",
     "test:bdd": "./node_modules/.bin/cucumber-js -f node_modules/cucumber-pretty --exit",
     "test:load": "artillery run loadtest.yml -o loadtest-report.json",
     "test:loadreport": "artillery report loadtest-report.json",
-    "test:db": "nyc mocha app/dbTree/tests/*.test.js --exit"
+    "test:mocha": "nyc mocha app/dbTree/tests/*.test.js --exit"
   },
   "jshintConfig": {
     "asi": true,

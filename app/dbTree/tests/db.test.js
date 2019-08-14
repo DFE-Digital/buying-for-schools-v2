@@ -35,7 +35,6 @@ describe('db', () => {
     expect(connectionStringCalled).to.equal('mongoURI')
     expect(dbNameCalled).to.equal('mydbname')
     expect(dbObj).to.have.property('getRecord')
-    expect(dbObj).to.have.property('populateFramework')
     expect(dbObj.structures).to.have.property('findOne')
   })
 
@@ -62,22 +61,6 @@ describe('db', () => {
           expect(doc).to.have.property('category')
           done()
         })
-    })
-  })
-
-  describe('populateFramework', () => {
-    let populatedFramework
-    before(() => {
-      populatedFramework = dbObj.populateFramework(testStructure, testStructure.framework[0])
-    })
-
-    it('should take a framework and convert the provider ref to actual provider data', () => {
-      expect(populatedFramework.provider).to.have.property('title')
-      expect(populatedFramework.provider).to.have.property('initials')
-    })
-
-    it('should take a framework and convert the category ref to actual category data', () => {
-      expect(populatedFramework.cat).to.have.property('title')
     })
   })
 })

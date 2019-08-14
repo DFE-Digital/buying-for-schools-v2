@@ -3,10 +3,7 @@ const path = require('path')
 const nunjucks = require('nunjucks')
 const utils = require('./utils')
 
-const dbTreeQuestionPage = app => (req, res) => {
-  const { urlInfo, lastPairDetail, summary } = res.locals
-  const question = lastPairDetail.question
-
+const dbTreeQuestionPage = app => (question, urlInfo, summary) => {
   const id = 'decision-tree-' + question.ref
   const radioOptions = {
     idPrefix: id,
@@ -28,7 +25,7 @@ const dbTreeQuestionPage = app => (req, res) => {
     const optionUrl = path.join(urlInfo.pathname, option.ref)
     const optionHint = option.hint
     return {
-      value: path.join(req.baseUrl, optionUrl),
+      value: path.join(urlInfo.baseUrl, optionUrl),
       text: option.title,
       hint: optionHint ? { text: optionHint } : null
     }
@@ -53,15 +50,14 @@ const dbTreeQuestionPage = app => (req, res) => {
     }
   }
 
-  const render = nunjucks.render('question.njk', {
-    locals: { frameworkPath: req.baseUrl },
+  return nunjucks.render('question.njk', {
+    locals: { frameworkPath: urlInfo.baseUrl },
     radioOptions,
     err,
     summary,
     suffix: question.suffix ? nunjucks.render(question.suffix) : '',
     pageTitle: err ? 'Error: ' + question.title : question.title
   })
-  res.send(render)
 }
 
 module.exports = dbTreeQuestionPage

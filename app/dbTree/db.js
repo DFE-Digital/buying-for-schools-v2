@@ -13,13 +13,32 @@ const dbFunc = options => {
 
   dbObj.getRecord = (status = docStatus) => {
     return dbObj.structures.findOne({ status }, { sort: { updatedAt: -1 } })
-  }
+      .then(doc => {
+        // flatten _id objects
+        doc._id = doc._id.toString()
+        doc.framework.forEach(f => {
+          f._id = f._id.toString()
+          f.cat = f.cat.toString()
+          f.provider = f.provider.toString()
+        })
+        doc.question.forEach(q => {
+          q._id = q._id.toString()
+          q.options.forEach(o => {
+            o._id = o._id.toString()
+            if (o.next) {
+              o.next = o.next.toString()
+            }
+          })
+        })
+        doc.provider.forEach(p => {
+          p._id = p._id.toString()
+        })
+        doc.category.forEach(c => {
+          c._id = c._id.toString()
+        })
 
-  dbObj.populateFramework = (doc, f) => {
-    const modifiedFramework = { ...f }
-    modifiedFramework.provider = doc.provider.find(p => p._id.toString() === f.provider.toString())
-    modifiedFramework.cat = doc.category.find(c => c._id.toString() === f.cat.toString())
-    return modifiedFramework
+        return doc
+      })
   }
 
   return dbObj

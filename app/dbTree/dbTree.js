@@ -1,6 +1,7 @@
 const url = require('url')
 const path = require('path')
 const utils = require('./utils')
+const nunjucks = require('nunjucks')
 
 const dbTree = app => {
   const me = {}
@@ -9,83 +10,63 @@ const dbTree = app => {
   me.dbTreeFramework = require('./dbTreeFramework')(app)
   me.dbTreeMultiple = require('./dbTreeMultiple')(app)
 
-  me.render = (req, res) => {
-    const { lastPairDetail = {}, frameworkDetails = {}, nextDetails = null } = res.locals
-    if (frameworkDetails.length === 1) {
-      return res.send(me.dbTreeFramework(frameworkDetails[0], res.locals.summary))
-    }
-    if (frameworkDetails.length) {
-      return me.dbTreeMultiple(req, res)
-    }
-
-    if (lastPairDetail.question && lastPairDetail.answer && nextDetails) {
-      return res.redirect(302, path.join(req.originalUrl, nextDetails.ref))
-    }
-
-    // [TODO]
-    if (lastPairDetail.question && lastPairDetail.answer) {
-      return res.send('DEADEND')
-    }
-
-    if (lastPairDetail.question) {
-      return me.dbTreeQuestion(req, res)
-    }
-
-    // [TODO]
-    res.send({ render: 'UNKNOWN', data: res.locals })
-  }
-
   me.handleRequest = (req, res) => {
-    // redirect if answered
     if (req.query && req.query['decision-tree']) {
       return res.redirect(302, req.query['decision-tree'])
     }
 
-    res.locals.urlInfo = url.parse(req.url)
+    const urlInfo = url.parse(req.url)
+    urlInfo.baseUrl = req.baseUrl
+    urlInfo.originalUrl = req.originalUrl
 
-    const pairs = utils.getQuestionAnswerPairSlugs(res.locals.urlInfo.pathname)
+    const pairs = utils.getQuestionAnswerPairSlugs(urlInfo.pathname)
     if (!pairs.length) {
       return res.redirect(302, path.join(req.baseUrl, 'type'))
     }
 
-    const lastPair = pairs[pairs.length - 1]
-    res.locals.pairs = pairs
-
-    let doc
     return me.db.getRecord()
-      .then(d => doc = d)
-      .then(() => pairs.map(p => utils.getPair(doc, p)))
-      .then(pairDetail => {
+      .then(doc => {
+        const pairDetail = utils.getPairDetail(doc, pairs)
+        const isValid = utils.validatePairChain(pairDetail)
+
+        if (!isValid) {
+          return res.status(404).send(nunjucks.render('404.njk'))
+        }
+
+        const summary = utils.getQuestionAnswerSummary(pairDetail, req.baseUrl)
+
         const lastPairDetail = pairDetail[pairDetail.length - 1]
-        res.locals.lastPairDetail = lastPairDetail
-        res.locals.pairDetail = pairDetail
-        res.locals.summary = utils.getQuestionAnswerSummary(pairDetail, req.baseUrl)
-
-        if (!lastPairDetail.question) {
-          // look for a single recommendation
-          return doc.framework.find(f => f.ref === lastPair[0])
-        }
-        if (lastPairDetail.question && lastPairDetail.answer) {
-          // if there are recommendations at the end of the chain
-          if (lastPairDetail.answer.next) {
-            // next question
-            return doc.question.find(q => q._id.toString() === lastPairDetail.answer.next.toString())
-          } else {
-            // results
-            return doc.framework.filter(f => lastPairDetail.answer.result.includes(f._id.toString()))
-          }
-        }
-        return []
-      }).then(nextDetails => {
-        if (nextDetails && nextDetails.options) {
-          res.locals.nextDetails = nextDetails
-          res.locals.frameworkDetails = []
-        } else {
-          const frameworks = nextDetails && nextDetails._id ? [nextDetails] : nextDetails
-          res.locals.frameworkDetails = frameworks.map(f => me.db.populateFramework(doc, f))
+        if (lastPairDetail.framework) {
+          // render a single framework
+          const populated = utils.populateFramework(doc, lastPairDetail.framework)
+          return res.send(me.dbTreeFramework(populated, summary))
         }
 
-        me.render(req, res)
+        if (lastPairDetail.question && !lastPairDetail.answer) {
+          // render unanswered question
+          return res.send(me.dbTreeQuestion(lastPairDetail.question, urlInfo, summary))
+        }
+
+        const nextQuestion = doc.question.find(q => q._id === lastPairDetail.answer.next)
+        if (nextQuestion) {
+          // go to next question
+          return res.redirect(302, path.join(req.originalUrl, nextQuestion.ref))
+        }
+
+        if (lastPairDetail.answer.result.length === 1) {
+          const f = doc.framework.find(f => f._id === lastPairDetail.answer.result[0])
+          // the question is answered and there is only one framework to go to
+          return res.redirect(302, path.join(req.originalUrl, f.ref))
+        }
+
+        if (lastPairDetail.answer.result.length > 1) {
+          // render multiple frameworks
+          const frameworks = doc.framework.filter(f => lastPairDetail.answer.result.includes(f._id))
+          const populated = frameworks.map(f => utils.populateFramework(doc, f))
+          return res.send(me.dbTreeMultiple(populated, urlInfo, summary))
+        }
+
+        return res.status(404).send(nunjucks.render('404.njk'))
       })
       .catch(err => {
         console.log('err', err)
