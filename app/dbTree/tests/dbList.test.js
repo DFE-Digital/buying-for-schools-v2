@@ -86,32 +86,6 @@ describe('dbList', () => {
           done()
         })
     })
-
-    // it('should handle an error in frameworkListPage', done => {
-    //   const initialised = dbList({ locals: {} })
-    //   initialised.frameworkListPage = () => Promise.reject('error')
-    //   initialised.handleRequest({
-    //     url: '/'
-    //   }, {
-    //     send: content => {
-    //       expect(content).equal('error')
-    //       done()
-    //     }
-    //   })
-    // })
-
-    // it('should handle an error in frameworkPage', done => {
-    //   const initialised = dbList({ locals: {} })
-    //   initialised.frameworkPage = () => Promise.reject('error')
-    //   initialised.handleRequest({
-    //     url: '/acme'
-    //   }, {
-    //     send: content => {
-    //       expect(content).equal('error')
-    //       done()
-    //     }
-    //   })
-    // })
   })
 
   describe('frameworkListPage', () => {

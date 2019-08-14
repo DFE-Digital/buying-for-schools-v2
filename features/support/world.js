@@ -20,7 +20,7 @@ class B4SWorld {
 
   async gotoPage (u) {
     if (!browser) {
-      browser = await puppeteer.launch({ headless: false })
+      browser = await puppeteer.launch({ headless: true })
     }
 
     if (!page) {
