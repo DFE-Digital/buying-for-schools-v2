@@ -21,7 +21,12 @@ const dbTreeQuestionPage = app => (question, urlInfo, summary) => {
     radioOptions.hint = { text: question.hint }
   }
 
-  radioOptions.items = question.options.map(option => {
+  const options = question.options.filter(option => {
+    // filter out deadend options
+    return option.next || (option.result && option.result.length)
+  })
+
+  radioOptions.items = options.map(option => {
     const optionUrl = path.join(urlInfo.pathname, option.ref)
     const optionHint = option.hint
     return {
@@ -50,12 +55,21 @@ const dbTreeQuestionPage = app => (question, urlInfo, summary) => {
     }
   }
 
+  let suffix = ''
+  if (question.suffix) {
+    try {
+      suffix = nunjucks.render(question.suffix)
+    } catch (e) {
+      suffix = ''
+    }
+  }
+
   return nunjucks.render('question.njk', {
     locals: { frameworkPath: urlInfo.baseUrl },
     radioOptions,
     err,
     summary,
-    suffix: question.suffix ? nunjucks.render(question.suffix) : '',
+    suffix,
     pageTitle: err ? 'Error: ' + question.title : question.title
   })
 }

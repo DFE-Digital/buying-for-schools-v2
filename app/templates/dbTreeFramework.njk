@@ -32,8 +32,17 @@
   <div class="govuk-grid-column-one-third">
     <aside class="app-related-items app-related-items--small" role="complementary">
       {% include "includes/framework-aside.njk" %}
-      {% block asideextra %}
-      {% endblock %}
+
+      {% if (links.length) %}
+        <h3 class="govuk-body-s">Explore the topic</h3>
+        <ul class="govuk-list govuk-!-font-size-16">
+          {% for link in links %}
+            <li>
+              <a href="{{ link.url }}" class="govuk-link">{{ link.text }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
     </aside>
   </div>
 

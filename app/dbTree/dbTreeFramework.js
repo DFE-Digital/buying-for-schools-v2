@@ -9,6 +9,7 @@ const dbTreeFramework = app => (framework, summary = '') => {
     locals: app.locals,
     providerFull: utils.getProviderFull(framework.provider),
     providerShort: utils.getProviderShort(framework.provider),
+    links: framework.links,
     body: marked(body),
     title: framework.title,
     url: framework.url,
