@@ -64,11 +64,7 @@ Launches a local website to explore the load report data, you must run the load 
 
 
 ## Code ##
-
-The project uses JSON data files to populate a set of data which is loaded when the app first loads this is held in memory permanently. This is possible because the number of frameworks we're expected to deal with is ~40 and the number of questions in the decision tree structure is ~30. As the numbers are so low it seems unnescessary to use a database. Not using a database greatly simplifies the deployment of the project.
-
-The service is stateless and the url of each stage conveys all required information to recreate each page.
-
+This project uses NodeJS, Express and Mongo (Azure Cosmos DB).
 
 
 

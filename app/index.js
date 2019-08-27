@@ -1,7 +1,5 @@
 const express = require('express')
 const serveStatic = require('serve-static')
-const path = require('path')
-const url = require('url')
 const port = process.env.PORT || 4000
 const app = express()
 
@@ -29,7 +27,8 @@ app.use((req, res, next) => {
   next()
 })
 
-const routeIntroPages = require('./routeIntroPages').route(app)
+const routeIntroPages = require('./routeIntroPages')
+routeIntroPages.route(app)
 
 app.locals.db = require('./dbTree/db')({
   connectionString: process.env.MONGO_READONLY,
