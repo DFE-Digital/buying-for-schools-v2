@@ -6,7 +6,6 @@
   "scripts": {
     "start": "node app/index.js",
     "start:dev": "gulp watch",
-    "start:testing": "jest --watchAll --coverage",
     "test": "npm run test:mocha && npm run test:bdd && npm run test:jshint",
     "test:jshint": "jshint app/**/*.js",
     "test:bdd": "./node_modules/.bin/cucumber-js -f node_modules/cucumber-pretty --exit",
@@ -18,13 +17,6 @@
     "asi": true,
     "esversion": 9,
     "maxcomplexity": 8
-  },
-  "jest": {
-    "testResultsProcessor": "./node_modules/jest-junit-reporter",
-    "testPathIgnorePatterns": [
-      "/node_modules/",
-      "/app/dbTree"
-    ]
   },
   "author": "",
   "license": "ISC",
@@ -52,11 +44,7 @@
     "chai-as-promised": "^7.1.1",
     "cucumber": "^5.1.0",
     "cucumber-pretty": "^1.5.2",
-    "gulp-jest": "^4.0.2",
     "gulp-nodemon": "^2.4.2",
-    "jest": "^24.8.0",
-    "jest-cli": "^24.8.0",
-    "jest-junit-reporter": "^1.1.0",
     "jshint": "^2.10.1",
     "mocha": "^6.2.0",
     "nyc": "^14.1.1",
