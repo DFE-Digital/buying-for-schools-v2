@@ -3,7 +3,7 @@ const path = require('path')
 const nunjucks = require('nunjucks')
 const utils = require('./utils')
 
-const dbTreeQuestionPage = app => (question, urlInfo, summary) => {
+const dbTreeQuestion = app => (question, urlInfo, summary) => {
   const id = 'decision-tree-' + question.ref
   const radioOptions = {
     idPrefix: id,
@@ -74,4 +74,4 @@ const dbTreeQuestionPage = app => (question, urlInfo, summary) => {
   })
 }
 
-module.exports = dbTreeQuestionPage
+module.exports = dbTreeQuestion

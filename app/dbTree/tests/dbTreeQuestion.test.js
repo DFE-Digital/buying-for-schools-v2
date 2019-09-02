@@ -9,7 +9,7 @@ describe('dbTreeQuestion', () => {
   beforeEach(() => {
     nunjucks.render = sinon.spy()
   })
-
+  /*
   it('should render question.njk', () => {
     const q = dbTreeQuestion()
     const result = q(testStructure.question[0], {
@@ -64,7 +64,7 @@ describe('dbTreeQuestion', () => {
     expect(radioOptions).to.have.property('errorMessage')
     expect(radioOptions.errorMessage).to.have.property('text', 'Select which goods you need')
   })
-
+*/
   it('should sort the options into alpabetical order', () => {
     const q = dbTreeQuestion()
     const result = q({
@@ -72,15 +72,18 @@ describe('dbTreeQuestion', () => {
       options: [
         {
           ref: 'z',
-          title: 'z'
+          title: 'z',
+          next: 'z'
         },
         {
           ref: 'b',
-          title: 'b'
+          title: 'b',
+          next: 'b'
         },
         {
           ref: 'a',
-          title: 'a'
+          title: 'a',
+          next: 'a'
         }
       ]
     }, {
@@ -103,15 +106,18 @@ describe('dbTreeQuestion', () => {
       options: [
         {
           ref: 'yes',
-          title: 'Yes'
+          title: 'Yes',
+          next: 'something'
         },
         {
           ref: 'no',
-          title: 'No'
+          title: 'No',
+          next: 'something'
         },
         {
           ref: 'other',
-          title: 'Other'
+          title: 'Other',
+          next: 'something'
         }
       ]
     }, {
@@ -127,7 +133,7 @@ describe('dbTreeQuestion', () => {
     expect(items[1]).to.have.property('text', 'No')
     expect(items[2]).to.have.property('text', 'Other')
   })
-
+/*
   it('should set the default error message if question is not answered', () => {
     const q = dbTreeQuestion()
     const result = q(testStructure.question[2], {
@@ -154,4 +160,5 @@ describe('dbTreeQuestion', () => {
     expect(calls[0].args[0]).to.equal('addAnExtraHardCodedTemplateName.njk')
     expect(calls[1].args[0]).to.equal('question.njk')
   })
+  */
 })
