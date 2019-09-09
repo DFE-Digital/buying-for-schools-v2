@@ -34,7 +34,7 @@ class B4SWorld {
     const results = []
     for (const row of data) {
       const sel = selectors(row[0])
-      const txt = await page.evaluate((s) => document.querySelector(s).innerText, sel)
+      const txt = await this.getText(sel)
       results.push({ expected: row[1], actual: txt })
     }
 
@@ -45,16 +45,31 @@ class B4SWorld {
 
   async checkText (selector, string) {
     // console.log('CheckText', selector, string)
-    const txt = await page.evaluate((s) => document.querySelector(s).innerText, selector)
+    const txt = await this.getText(selector)
     return expect(txt).to.eql(string)
+  }
+
+  async getText (selector) {
+    return await page.evaluate(selector => {
+      const element = document.querySelector(selector)
+      return element ? element.innerText : null
+    }, selector)
+  }
+
+  async getValue (selector) {
+    return await page.evaluate(selector => {
+      const element = document.querySelector(selector)
+      return element ? element.value : null
+    }, selector)
   }
 
   async haveRadioButtons (data) {
     const radioGroups = await page.evaluate(() => document.getElementsByClassName('govuk-radios__item').length)
     const results = []
     for (let i = 1; i <= radioGroups; i++) {
-      const txt = await page.evaluate((i) => document.querySelector(`.govuk-radios__item:nth-child(${i}) label`).innerText, i)
-      const val = await page.evaluate((i) => document.querySelector(`.govuk-radios__item:nth-child(${i}) input`).value, i)
+
+      const txt = await this.getText(`.govuk-radios__item:nth-child(${i}) label`)
+      const val = await this.getValue(`.govuk-radios__item:nth-child(${i}) input`)
       results.push({ label: txt, value: val })
     }
 

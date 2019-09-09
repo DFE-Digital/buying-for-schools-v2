@@ -1,5 +1,5 @@
+const urljoin = require('url-join')
 const url = require('url')
-const path = require('path')
 const nunjucks = require('nunjucks')
 const utils = require('./utils')
 
@@ -27,10 +27,10 @@ const dbTreeQuestion = app => (question, urlInfo, summary) => {
   })
 
   radioOptions.items = options.map(option => {
-    const optionUrl = path.join(urlInfo.pathname, option.ref)
+    const optionUrl = urljoin(urlInfo.pathname, option.ref)
     const optionHint = option.hint
     return {
-      value: path.join(urlInfo.baseUrl, optionUrl),
+      value: urljoin(urlInfo.baseUrl, optionUrl),
       text: option.title,
       hint: optionHint ? { text: optionHint } : null
     }

@@ -14,6 +14,7 @@ Then("the service displays the following page content", async function(data) {
 })
 
 Then('have radio buttons', async function (data) {
+  console.log('have radio buttons')
   await this.haveRadioButtons(data.raw())
 })
 

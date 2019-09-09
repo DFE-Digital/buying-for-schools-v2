@@ -1,3 +1,4 @@
+const urljoin = require('url-join')
 const url = require('url')
 const path = require('path')
 const utils = require('./utils')
@@ -21,7 +22,7 @@ const dbTree = app => {
 
     const pairs = utils.getQuestionAnswerPairSlugs(urlInfo.pathname)
     if (!pairs.length) {
-      return res.redirect(302, path.join(req.baseUrl, 'type'))
+      return res.redirect(302, urljoin(req.baseUrl, 'type'))
     }
 
     return me.db.getRecord()
@@ -50,13 +51,13 @@ const dbTree = app => {
         const nextQuestion = doc.question.find(q => q._id === lastPairDetail.answer.next)
         if (nextQuestion) {
           // go to next question
-          return res.redirect(302, path.join(req.originalUrl, nextQuestion.ref))
+          return res.redirect(302, urljoin(req.originalUrl, nextQuestion.ref))
         }
 
         if (lastPairDetail.answer.result.length === 1) {
           const f = doc.framework.find(f => f._id === lastPairDetail.answer.result[0])
           // the question is answered and there is only one framework to go to
-          return res.redirect(302, path.join(req.originalUrl, f.ref))
+          return res.redirect(302, urljoin(req.originalUrl, f.ref))
         }
 
         if (lastPairDetail.answer.result.length > 1) {
