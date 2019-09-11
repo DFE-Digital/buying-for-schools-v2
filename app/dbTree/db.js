@@ -1,8 +1,11 @@
 const mongoDB = require('mongodb')
 const mClient = mongoDB.MongoClient
+const dbNameRegex = /.+azure.com:\d+\/([^\?]+).+/
 
 const dbFunc = options => {
-  const { connectionString, dbName, docStatus } = options
+  const { connectionString, docStatus } = options
+  
+  const dbName = connectionString.replace(dbNameRegex, '$1')
   const client = new mClient(connectionString, { useNewUrlParser: true })
   const dbObj = {}
   dbObj.docStatus = docStatus
@@ -12,6 +15,7 @@ const dbFunc = options => {
     .then(() => console.log('connection made'))
 
   dbObj.getRecord = (status = docStatus) => {
+    console.log('getRecord', status)
     return dbObj.structures.findOne({ status }, { sort: { updatedAt: -1 } })
       .then(doc => {
         // flatten _id objects

@@ -32,7 +32,6 @@ routeIntroPages.route(app)
 
 app.locals.db = require('./dbTree/db')({
   connectionString: process.env.MONGO_READONLY,
-  dbName: 's107d01-mongo-01',
   docStatus: process.env.DOC_STATUS || 'LIVE'
 })
 const dbTree = require('./dbTree/dbTree')(app)
