@@ -4,6 +4,7 @@ const sinon = require('sinon')
 const dbTreeQuestion = require('../dbTreeQuestion')
 const testStructure = require('./data/structure.json')
 const nunjucks = require('nunjucks')
+const testApp = { locals: {}}
 
 describe('dbTreeQuestion', () => {
   beforeEach(() => {
@@ -11,7 +12,7 @@ describe('dbTreeQuestion', () => {
   })
   
   it('should render question.njk', () => {
-    const q = dbTreeQuestion()
+    const q = dbTreeQuestion(testApp)
     const result = q(testStructure.question[0], {
       pathname: '/type',
       baseUrl: '/alpha'
@@ -29,7 +30,7 @@ describe('dbTreeQuestion', () => {
   })
 
   it('should supply radio options suitable for gov uk radio template', () => {
-    const q = dbTreeQuestion()
+    const q = dbTreeQuestion(testApp)
     const result = q(testStructure.question[1], {
       pathname: '/type/buying/what',
       baseUrl: '/alpha'
@@ -53,7 +54,7 @@ describe('dbTreeQuestion', () => {
   })
 
   it('should return error messages if appropriate', () => {
-    const q = dbTreeQuestion()
+    const q = dbTreeQuestion(testApp)
     const result = q(testStructure.question[1], {
       pathname: '/type/buying/what/goods',
       search: 'something',
@@ -66,7 +67,7 @@ describe('dbTreeQuestion', () => {
   })
 
   it('should sort the options into alpabetical order', () => {
-    const q = dbTreeQuestion()
+    const q = dbTreeQuestion(testApp)
     const result = q({
       title: 'test',
       options: [
@@ -100,7 +101,7 @@ describe('dbTreeQuestion', () => {
   })
 
   it('should NOT sort the options into alpabetical order if the first item is Yes', () => {
-    const q = dbTreeQuestion()
+    const q = dbTreeQuestion(testApp)
     const result = q({
       title: 'test',
       options: [
@@ -135,7 +136,7 @@ describe('dbTreeQuestion', () => {
   })
 
   it('should set the default error message if question is not answered', () => {
-    const q = dbTreeQuestion()
+    const q = dbTreeQuestion(testApp)
     const result = q(testStructure.question[2], {
       pathname: '/type/buying/what/goods/class-library',
       search: 'something',
@@ -149,7 +150,7 @@ describe('dbTreeQuestion', () => {
   })
 
   it('should apply a suffix template if specified in the question properties', () => {
-    const q = dbTreeQuestion()
+    const q = dbTreeQuestion(testApp)
     const result = q(testStructure.question[2], {
       pathname: '/type/buying/what/goods',
       baseUrl: '/alpha'

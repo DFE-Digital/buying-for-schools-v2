@@ -65,7 +65,7 @@ const dbTreeQuestion = app => (question, urlInfo, summary) => {
   }
 
   return nunjucks.render('question.njk', {
-    locals: { frameworkPath: urlInfo.baseUrl },
+    locals: { ...app.locals, frameworkPath: urlInfo.baseUrl },
     radioOptions,
     err,
     summary,
