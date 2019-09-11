@@ -2,6 +2,7 @@ const chai = require('chai')
 const expect = chai.expect
 
 const testStructure = require('./data/structure.json')
+const testConnectionString = 'mongodb://s107p01-mongo-01.documents.azure.com:10255/test_db_name?ssl=true'
 
 const mongoDB = require('mongodb')
 
@@ -27,13 +28,13 @@ const dbFunc = require('../db')
 describe('db', () => {
   let dbObj
   before(done => {
-    dbObj = dbFunc({ connectionString: 'mongoURI', dbName: 'mydbname', docStatus: 'DRAFT' })
+    dbObj = dbFunc({ connectionString: testConnectionString, dbName: 'mydbname', docStatus: 'DRAFT' })
     dbObj.connected.then(() => done())
   })
 
   it('should try to initialise a mongoClient with given connection string', () => {
-    expect(connectionStringCalled).to.equal('mongoURI')
-    expect(dbNameCalled).to.equal('mydbname')
+    expect(connectionStringCalled).to.equal(testConnectionString)
+    expect(dbNameCalled).to.equal('test_db_name')
     expect(dbObj).to.have.property('getRecord')
     expect(dbObj.structures).to.have.property('findOne')
   })
