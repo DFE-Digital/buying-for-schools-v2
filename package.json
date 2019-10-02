@@ -7,7 +7,7 @@
     "start": "node app/index.js",
     "start:dev": "gulp watch",
     "build": "gulp",
-    "test": "npm run test:mocha && npm run test:bdd && npm run test:jshint",
+    "test": "npm run test:mocha && npm run test:jshint",
     "test:jshint": "jshint app/**/*.js",
     "test:bdd": "./node_modules/.bin/cucumber-js -f node_modules/cucumber-pretty --exit",
     "test:load": "artillery run loadtest.yml -o loadtest-report.json",
