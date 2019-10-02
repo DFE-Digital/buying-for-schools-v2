@@ -15,7 +15,6 @@ const dbFunc = options => {
     .then(() => console.log('connection made'))
 
   dbObj.getRecord = (status = docStatus) => {
-    console.log('getRecord', status)
     return dbObj.structures.findOne({ status }, { sort: { updatedAt: -1 } })
       .then(doc => {
         // flatten _id objects
