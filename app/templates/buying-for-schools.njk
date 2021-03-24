@@ -10,32 +10,45 @@
 {% extends "template.njk" %}
 
 {% block head %}
-  <!-- Google Tag Manager -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-N7JPPRB');</script>
-  <!-- End Google Tag Manager -->
-
   <meta name="robots" content="noindex, nofollow">
-
   <link rel="stylesheet" href="/assets/styles/main.css">
 {% endblock %}
 
 {% block pageTitle %}{{ pageTitle }} - {{ locals.serviceName }} - GOV.UK{% endblock %}
 
 {% block bodyStart %}
-  <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N7JPPRB"
-  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
 {% endblock %}
 
 {% block header %}
-  <div id="global-cookie-message" style="display: block;">
-    <p>GOV.UK uses cookies to make the site simpler. <a href="https://www.gov.uk/help/cookies" data-module="track-click" data-track-category="cookieBanner" data-track-action="Cookie banner clicked" class="govuk-link">Find out more about cookies</a></p>
+
+  <div id="global-cookie-message" class="cookie-banner govuk-clearfix" style="display: none;" role="region" aria-label="cookie banner">
+      <div class="cookie-banner__wrapper govuk-width-container">
+          <div class="govuk-grid-row">
+              <div class="govuk-grid-column-two-thirds">
+                  <div class="cookie-banner__message">
+                      <h2 class="govuk-heading-m">Cookies on {{ locals.serviceName }}</h2>
+                      <p class="govuk-body">We use some essential cookies to make this website work.</p>
+                      <p class="govuk-body">We’d like to set additional <a class="govuk-link" href="/cookies">cookies</a> to help us improve this service.</p>
+                  </div>
+                  <div class="cookie-banner__buttons">
+                      <button type="submit" class="button govuk-button button--inline js-accept-all-cookies">
+                          Accept all cookies
+                      </button>                      
+                      <button type="submit" class="button govuk-button button--inline js-reject-all-cookies">
+                          Reject all cookies
+                      </button>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="cookie-banner__confirmation govuk-width-container" style="display: none;">
+          <p class="govuk-body" role="alert">
+              You’ve accepted all <a class="govuk-link" href="/cookies">cookies</a>.
+          </p>
+          <button class="button govuk-button button--inline js-cookie-hide">Hide</button>
+      </div>
   </div>
+
   {{ govukHeader({
     homepageUrl: "https://www.gov.uk/",
     containerClasses: "govuk-width-container",
@@ -64,7 +77,7 @@
     meta: {
       items: [
         {
-          href: "https://www.gov.uk/help/cookies",
+          href: "/cookies",
           text: "Cookies"
         }
       ]
@@ -75,4 +88,24 @@
 {% block bodyEnd %}
   <script src="/assets/all.js"></script>
   <script src="/assets/frameworks.js" id="mainscript"></script>
+  <!-- Google Tag Manager -->
+  <script>  
+    (function(w,d,s,l,i){
+      window.setGA = function(){
+        w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      };
+
+      if (window.cookie_consent) {
+        setGA();
+      }
+    })(window,document,'script','dataLayer','GTM-N7JPPRB');
+  </script>
+  <!-- End Google Tag Manager -->
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N7JPPRB"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
 {% endblock %}

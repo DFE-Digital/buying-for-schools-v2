@@ -17,6 +17,11 @@ const getIntroPages = () => {
       path: '/service-output',
       title: 'After you’ve used the service',
       tpl: 'intro-service-output.njk'
+    },
+    {
+      path: '/cookies',
+      title: 'cookies',
+      tpl: 'cookies.njk'
     }
   ]
 

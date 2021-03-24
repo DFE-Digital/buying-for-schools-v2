@@ -17,6 +17,21 @@ function clearCookie(name) {
 function setCookie(name, value) {
   document.cookie = name + '=' + value + ";Path=/;"
 }
+function setCookieWithExpiry(name, value, exdays) {
+  var d = new Date();
+  d.setTime(d.getTime() + (exdays*24*60*60*1000));
+  var expires = "expires="+ d.toUTCString();
+  document.cookie = name + "=" + value + ";" + expires + ";path=/";
+}
+
+
+window.cookie_acceptance_name = 'cookie_consent';
+window.consentCookie = getCookie(cookie_acceptance_name);
+window.cookie_consent = false;
+if (consentCookie === 'yes') {
+  window.cookie_consent = true;
+}
+
 
 //## SURVEY ##//
 
@@ -74,12 +89,32 @@ for (var i=0; i<externalButtons.length; i++) {
   externalButtons[i].onclick = getOutboundLink
 }
 
+(function(){
+  var cookieBanner = document.querySelector('#global-cookie-message');
+  var cookieAsk = document.querySelector('.cookie-banner__wrapper');
+  var cookieAcceptConfirmation = document.querySelector('.cookie-banner__confirmation');
+  var acceptAllCookiesButton = document.querySelector(".js-accept-all-cookies");
+  var rejectAllCookiesButton = document.querySelector(".js-reject-all-cookies");
+  var hideAcceptMessage = document.querySelector('.js-cookie-hide');
+  
+  if (cookieBanner && !window.consentCookie) {
+      cookieBanner.style.display = 'block';
+      acceptAllCookiesButton.addEventListener("click", function (event) {
+          setCookieWithExpiry(cookie_acceptance_name, 'yes', 365);
+          cookieAsk.style.display = 'none';
+          cookieAcceptConfirmation.style.display = 'block';
+          if(setGA) {
+            setGA();
+          }          
+      }, false);
 
-// if the cookie warning has been seen hide the cookie message
-var seenCookieMessage = getCookie('seen_cookie_message')
-if (seenCookieMessage === 'yes') {
-  document.getElementById('global-cookie-message').style.display = 'none'
-}
-setCookie('seen_cookie_message', 'yes')
+      rejectAllCookiesButton.addEventListener("click", function (event) {
+          setCookieWithExpiry(cookie_acceptance_name, 'no', 365);
+          cookieBanner.style.display = 'none';
+      }, false);
 
-
+      hideAcceptMessage.addEventListener('click', function (event) {
+          cookieBanner.style.display = 'none';
+      });
+  }
+}());
