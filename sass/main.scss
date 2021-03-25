@@ -114,6 +114,18 @@
   }
 }
 
+.js-enabled .enable-js {
+  display: none;
+}
+
+.conditionally-hidden {
+  display: none;
+}
+
+.js-enabled .conditionally-hidden {
+  display: block;
+}
+
 .govuk-table__cell--supplier {
   width: 60px;
   @media (min-width: 40.0625em) {

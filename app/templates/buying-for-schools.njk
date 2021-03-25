@@ -25,11 +25,11 @@
 {% endset %}
 
 {% set acceptHtml %}
-  <p>You’ve accepted analytics cookies. You can <a href="/cookie-settings">change your cookie settings</a> at any time.</p>
+  <p>You’ve accepted analytics cookies. You can <a href="/cookies">change your cookie settings</a> at any time.</p>
 {% endset %}
 
 {% set rejectHtml %}
-  <p>You’ve accepted analytics cookies. You can <a href="/cookie-settings">change your cookie settings</a> at any time.</p>
+  <p>You’ve accepted analytics cookies. You can <a href="/cookies">change your cookie settings</a> at any time.</p>
 {% endset %}
 
 {{ govukCookieBanner({
@@ -131,11 +131,16 @@
   <!-- Google Tag Manager -->
   <script>  
     (function(w,d,s,l,i){
+      var gaSet = false;
       window.setGA = function(){
+        if(gaSet) {
+          return;
+        }
         w[l]=w[l]||[];w[l].push({'gtm.start':
         new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
         j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        gaSet = true;
       };
 
       if (window.cookie_consent) {

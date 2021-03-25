@@ -1,0 +1,84 @@
+{% extends "buying-for-schools.njk" %}
+
+{# Adds a class to increase vertical spacing for pages without a back button #}
+{% set mainClasses = "govuk-main-wrapper--l" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <span class="govuk-caption-l">{{ locals.serviceName }}</span>
+        <h1 class="govuk-heading-l">Cookie policy</h1>
+    </div>
+</div>
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        <p class="govuk-body">
+            This website puts small files (known as 'cookies') onto your computer to collect
+            information about how you browse the site.
+        </p>
+
+        <p class="govuk-body">
+            By understanding how people use our site, we can use the data to help improve the site in future.
+        </p>
+
+        <p class="govuk-body">
+            The tables below explain which cookies this website uses for measuring use of service, and the expiry date.
+        </p>
+
+        <h2 class="govuk-heading-m">Strictly necessary cookies</h3>
+        <p class="govuk-body">These cookies are always required to be set in order for the site to function correctly and be secure.</p>
+
+        <table class="govuk-table govuk-!-margin-bottom-7">
+            <caption class="govuk-table__caption">Strictly necessary cookies</caption>
+            <thead class="govuk-table__header">
+                <tr class="govuk-table__row">
+                    <th scope="col" class="govuk-table__header" width="25%">Name</th>
+                    <th scope="col" class="govuk-table__header" width="50%">Description</th>
+                    <th scope="col" class="govuk-table__header" width="25%">Expires</th>
+                </tr>
+            </thead>
+            <tbody class="govuk-table__body">
+                <tr class="govuk-table__row">
+                    <th scope="row" class="govuk-table__header">cookie_consent</th>
+                    <td class="govuk-table__cell">Used to remember your cookie acceptance.</td>
+                    <td class="govuk-table__cell">1 year.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 class="govuk-heading-m">Analytics cookies</h3>
+        <p class="govuk-body">These cookies are set to provide site analytics if you accept the cookie policy.</p>
+
+        <table class="govuk-table govuk-!-margin-bottom-7">
+            <caption class="govuk-table__caption">Analytics cookies</caption>
+            <thead class="govuk-table__header">
+                <tr class="govuk-table__row">
+                    <th scope="col" class="govuk-table__header" width="25%">Name</th>
+                    <th scope="col" class="govuk-table__header" width="50%">Description</th>
+                    <th scope="col" class="govuk-table__header" width="25%">Expires</th>
+                </tr>
+            </thead>
+            <tbody class="govuk-table__body">
+                <tr class="govuk-table__row">
+                    <th scope="row" class="govuk-table__header">_ga</th>
+                    <td class="govuk-table__cell">Randomly generated number. Used to distinguish users.</td>
+                    <td class="govuk-table__cell">Two years.</td>
+                </tr>
+                <tr class="govuk-table__row">
+                    <th scope="row" class="govuk-table__header">_gid</th>
+                    <td class="govuk-table__cell">Randomly generated number. Used to distinguish users.</td>
+                    <td class="govuk-table__cell">24 hours.</td>
+                </tr>
+                <tr class="govuk-table__row">
+                    <th scope="row" class="govuk-table__header">_gat_ua_</th>
+                    <td class="govuk-table__cell">(1) Used to throttle request rate to google analytics.</td>
+                    <td class="govuk-table__cell">1 minute.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p class="govuk-body">To find out more about <a class="govuk-link" href="https://ico.org.uk/for-the-public/online/cookies/">how to manage cookies</a>.</p>
+    </div>
+</div>
+{% endblock %}

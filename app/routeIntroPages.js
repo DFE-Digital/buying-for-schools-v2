@@ -19,8 +19,13 @@ const getIntroPages = () => {
       tpl: 'intro-service-output.njk'
     },
     {
+      path: '/cookie-details',
+      title: 'Cookie Details',
+      tpl: 'cookie-details.njk'
+    },
+    {
       path: '/cookies',
-      title: 'cookies',
+      title: 'Cookies',
       tpl: 'cookies.njk'
     }
   ]
