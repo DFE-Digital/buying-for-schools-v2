@@ -1,3 +1,4 @@
+{% from "cookie-banner/macro.njk" import govukCookieBanner %}
 {% from "phase-banner/macro.njk" import govukPhaseBanner %}
 {% from "radios/macro.njk" import govukRadios %}
 {% from "button/macro.njk" import govukButton %}
@@ -10,32 +11,84 @@
 {% extends "template.njk" %}
 
 {% block head %}
-  <!-- Google Tag Manager -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-N7JPPRB');</script>
-  <!-- End Google Tag Manager -->
-
   <meta name="robots" content="noindex, nofollow">
-
   <link rel="stylesheet" href="/assets/styles/main.css">
 {% endblock %}
 
 {% block pageTitle %}{{ pageTitle }} - {{ locals.serviceName }} - GOV.UK{% endblock %}
 
 {% block bodyStart %}
-  <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N7JPPRB"
-  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
+
+{% set cookieHtml %}
+  <p>We use some essential cookies to make this service work.</p>
+  <p>We’d also like to use analytics cookies so we can understand how you use the service and make improvements.</p>
+{% endset %}
+
+{% set acceptHtml %}
+  <p>You’ve accepted analytics cookies. You can <a href="/cookies">change your cookie settings</a> at any time.</p>
+{% endset %}
+
+{% set rejectHtml %}
+  <p>You’ve accepted analytics cookies. You can <a href="/cookies">change your cookie settings</a> at any time.</p>
+{% endset %}
+
+{{ govukCookieBanner({
+  ariaLabel: "Cookies on " + locals.serviceName,
+  classes: "js-cookie-banner",
+  hidden: true,
+  messages: [
+    {
+      headingText: "Cookies on " + locals.serviceName,
+      html: cookieHtml,
+      classes: "js-cookie-ask",
+      actions: [
+        {
+          classes: "js-accept-all-cookies",
+          text: "Accept analytics cookies",
+          type: "button"
+        },
+        {
+          classes: "js-reject-all-cookies",
+          text: "Reject analytics cookies",
+          type: "button"
+        },
+        {
+          text: "View cookies",
+          href: "/cookies"
+        }
+      ]
+    },
+    {
+      html: acceptHtml,
+      classes: "js-cookies-accepted",
+      role: "alert",
+      hidden: true,
+      actions: [
+        {
+          classes: "js-hide-cookie-banner",
+          text: "Hide this message"
+        }
+      ]
+    },
+    {
+      html: rejectHtml,
+      classes: "js-cookies-rejected",
+      role: "alert",
+      hidden: true,
+      actions: [
+        {
+          classes: "js-hide-cookie-banner",
+          text: "Hide this message"
+        }
+      ]
+    }
+  ]
+}) }}
+
 {% endblock %}
 
 {% block header %}
-  <div id="global-cookie-message" style="display: block;">
-    <p>GOV.UK uses cookies to make the site simpler. <a href="https://www.gov.uk/help/cookies" data-module="track-click" data-track-category="cookieBanner" data-track-action="Cookie banner clicked" class="govuk-link">Find out more about cookies</a></p>
-  </div>
+
   {{ govukHeader({
     homepageUrl: "https://www.gov.uk/",
     containerClasses: "govuk-width-container",
@@ -64,7 +117,7 @@
     meta: {
       items: [
         {
-          href: "https://www.gov.uk/help/cookies",
+          href: "/cookies",
           text: "Cookies"
         }
       ]
@@ -75,4 +128,29 @@
 {% block bodyEnd %}
   <script src="/assets/all.js"></script>
   <script src="/assets/frameworks.js" id="mainscript"></script>
+  <!-- Google Tag Manager -->
+  <script>  
+    (function(w,d,s,l,i){
+      var gaSet = false;
+      window.setGA = function(){
+        if(gaSet) {
+          return;
+        }
+        w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        gaSet = true;
+      };
+
+      if (window.cookie_consent) {
+        setGA();
+      }
+    })(window,document,'script','dataLayer','GTM-N7JPPRB');
+  </script>
+  <!-- End Google Tag Manager -->
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N7JPPRB"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
 {% endblock %}

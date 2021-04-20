@@ -1,7 +1,7 @@
 .card {
   position: relative;
   width: 100%;
-  background-color: govuk-colour("grey-4");
+  background-color: govuk-colour("light-grey");
   border: 1px solid $govuk-border-colour;
   margin-bottom: govuk-spacing(3);
 }
@@ -36,7 +36,7 @@
 .card__content {
   &::after {
     clear: both;
-    content: ' ';
+    content: " ";
     display: block;
   }
 }
@@ -54,7 +54,7 @@
   margin: 0 govuk-spacing(1) 0 0;
   padding: 0;
 
-  @media(max-width: 670px) {
+  @media (max-width: 670px) {
     float: none;
     margin: 0;
   }
@@ -67,7 +67,7 @@
 .card dd {
   margin-right: govuk-spacing(5);
 
-  @media(max-width: 670px) {
+  @media (max-width: 670px) {
     margin-bottom: 20px;
 
     &:last-of-type {
@@ -75,7 +75,6 @@
     }
   }
 }
-
 
 .card p {
   margin-bottom: 0;

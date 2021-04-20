@@ -24,7 +24,7 @@
   "dependencies": {
     "express": "^4.17.1",
     "express-basic-auth": "^1.2.0",
-    "govuk-frontend": "^2.13.0",
+    "govuk-frontend": "^3.11.0",
     "gulp": "^4.0.2",
     "gulp-cli": "^2.2.0",
     "gulp-copy": "^4.0.1",
@@ -32,7 +32,7 @@
     "mkdirp": "^0.5.1",
     "moment": "^2.24.0",
     "mongodb": "^3.3.0-beta2",
-    "nunjucks": "^3.1.7",
+    "nunjucks": "^3.2.3",
     "sass": "^1.22.5",
     "serve-static": "^1.14.1",
     "url-join": "^4.0.1"
@@ -46,7 +46,7 @@
     "chai-as-promised": "^7.1.1",
     "cucumber": "^5.1.0",
     "cucumber-pretty": "^1.5.2",
-    "gulp-nodemon": "^2.4.2",
+    "gulp-nodemon": "^2.5.0",
     "jshint": "^2.10.1",
     "mocha": "^6.2.0",
     "nyc": "^14.1.1",
