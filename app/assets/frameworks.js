@@ -36,7 +36,7 @@ function removeAllCookies(){
           while (p.length > 0) {
               document.cookie = cookieBase + p.join('/');
               p.pop();
-          };
+          }
           d.shift();
       }
   }
@@ -71,7 +71,13 @@ if (consentCookie === 'yes') {
   var cookieRejectConfirmation = document.querySelector('.js-cookies-rejected');
   var hideBannerButton = document.querySelectorAll('.js-hide-cookie-banner');
   var hideBannerIndex;
-    
+  
+  function setupBannerClose(idx) {
+    hideBannerButton[idx].addEventListener('click', function() {
+      cookieBanner.setAttribute('hidden', '');
+    });
+  }
+
   if (cookieBanner && !window.consentCookie) {
       cookieBanner.removeAttribute('hidden');
       acceptAllCookiesButton.addEventListener('click', function (event) {
@@ -90,10 +96,8 @@ if (consentCookie === 'yes') {
       }, false);
 
       for (hideBannerIndex = 0; hideBannerIndex < hideBannerButton.length; hideBannerIndex++) {
-        hideBannerButton[hideBannerIndex].addEventListener('click', function() {
-          cookieBanner.setAttribute('hidden', '');
-        });
-    }
+        setupBannerClose(hideBannerIndex);
+      }
   }
 }());
 
