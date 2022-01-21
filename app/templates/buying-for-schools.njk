@@ -93,7 +93,7 @@
     homepageUrl: "https://www.gov.uk/",
     containerClasses: "govuk-width-container",
     serviceName: "Find a DfE approved framework for your school",
-    serviceUrl: "https://www.gov.uk/guidance/find-a-dfe-approved-framework-for-your-school"  
+    serviceUrl: "https://www.gov.uk/guidance/find-a-dfe-approved-framework-for-your-school"
   }) }}
 
   {% if locals.db.docStatus === 'LIVE' %}
@@ -119,6 +119,13 @@
         {
           href: "/cookies",
           text: "Cookies"
+        },
+        {
+          href: "https://get-help-buying-for-schools.education.gov.uk/procurement-support",
+          text: "Request advice and guidance",
+          attributes: {
+            target: "_blank"
+          }
         }
       ]
     }
@@ -129,7 +136,7 @@
   <script src="/assets/all.js"></script>
   <script src="/assets/frameworks.js" id="mainscript"></script>
   <!-- Google Tag Manager -->
-  <script>  
+  <script>
     (function(w,d,s,l,i){
       var gaSet = false;
       window.setGA = function(){
