@@ -35,6 +35,11 @@
             classes: 'govuk-!-margin-bottom-0'
         }) }}
 
+        <div class="govuk-!-margin-top-4">
+          <a href={{"https://www.get-help-buying-for-schools.service.gov.uk/procurement-support" 
+              if locals.db.docStatus == "LIVE"
+              else "https://staging-get-help-buying-for-schools.education.gov.uk/procurement-support"}} class="govuk-link">Request advice and guidance</a>
+        </div>  
       </div>
 
     </div>
