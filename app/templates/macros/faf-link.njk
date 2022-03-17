@@ -1,0 +1,11 @@
+{% macro fafLink(optionalClass='') %}
+  <div {% if optionalClass %}
+  class = {{optionalClass}}
+  {% endif %}
+  >
+    <a href={{"https://www.get-help-buying-for-schools.service.gov.uk/procurement-support?referred_by=" + currentUrl 
+      if locals.db.docStatus == "LIVE"
+      else "https://staging-get-help-buying-for-schools.education.gov.uk/procurement-support?referred_by=" + currentUrl}} class="govuk-link" 
+      target="_blank">Request advice and guidance</a>
+  </div>  
+{% endmacro %}

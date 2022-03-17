@@ -1,4 +1,5 @@
 {% extends "buying-for-schools.njk" %}
+{% from "macros/faf-link.njk" import fafLink %}
 
 {# Adds a class to increase vertical spacing for pages without a back button #}
 {% set mainClasses = "govuk-main-wrapper--l" %}
@@ -35,11 +36,8 @@
             classes: 'govuk-!-margin-bottom-0'
         }) }}
 
-        <div class="govuk-!-margin-top-4">
-          <a href={{"https://www.get-help-buying-for-schools.service.gov.uk/procurement-support" 
-              if locals.db.docStatus == "LIVE"
-              else "https://staging-get-help-buying-for-schools.education.gov.uk/procurement-support"}} class="govuk-link">Request advice and guidance</a>
-        </div>  
+        {{ fafLink(optionalClass="govuk-!-margin-top-4") }}
+
       </div>
 
     </div>

@@ -1,5 +1,6 @@
 {% extends "result.njk" %}
 {% import "macros/results.njk" as results %}
+{% from "macros/faf-link.njk" import fafLink %}
 
 {% block content %}
 <div class="govuk-grid-row">
@@ -25,11 +26,7 @@
 
     {{ results.button(providerShort, url) }}
     
-    <div>
-      <a href={{"https://www.get-help-buying-for-schools.service.gov.uk/procurement-support" 
-          if locals.db.docStatus == "LIVE"
-          else "https://staging-get-help-buying-for-schools.education.gov.uk/procurement-support"}} class="govuk-link">Request advice and guidance</a>
-    </div>  
+    {{ fafLink() }}
 
     {% include "summary.njk" %}
   </div>
