@@ -3,9 +3,9 @@
   class = {{optionalClass}}
   {% endif %}
   >
-    <a href={{"https://www.get-help-buying-for-schools.service.gov.uk/procurement-support?referred_by=" + currentUrl 
+    <a href={{"https://www.get-help-buying-for-schools.service.gov.uk/procurement-support?referred_by=" + currentUrl | base64Encode 
       if locals.db.docStatus == "LIVE"
-      else "https://staging-get-help-buying-for-schools.education.gov.uk/procurement-support?referred_by=" + currentUrl}} class="govuk-link" 
+      else "https://staging-get-help-buying-for-schools.education.gov.uk/procurement-support?referred_by=" + currentUrl | base64Encode }} class="govuk-link" 
       target="_blank">Request advice and guidance</a>
   </div>  
 {% endmacro %}

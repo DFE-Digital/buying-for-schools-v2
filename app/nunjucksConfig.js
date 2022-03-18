@@ -17,6 +17,8 @@ const nunjucksConfig = app => {
     next()
   })
 
+  env.addFilter("base64Encode", (string) => Buffer.from(string).toString('base64'))
+
   return nunjucks
 }
 
