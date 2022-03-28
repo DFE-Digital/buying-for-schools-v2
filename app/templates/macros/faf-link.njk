@@ -1,6 +1,5 @@
 {% macro fafLink(optionalClass='') %}
-
-  {# {% set prodLink = "https://www.get-help-buying-for-schools.service.gov.uk/procurement-support?referred_by=" %}
+  {% set prodLink = "https://www.get-help-buying-for-schools.service.gov.uk/procurement-support?referred_by=" %}
   {% set stagingLink = "https://staging-get-help-buying-for-schools.education.gov.uk/procurement-support?referred_by=" %}
 
   <div {% if optionalClass %}
@@ -10,5 +9,5 @@
     <a href={{ (prodLink if docStatus == "LIVE" else stagingLink) + (currentUrl | base64Encode) }} class="govuk-link" target="_blank">
       Request advice and guidance
     </a>
-  </div> #}
+  </div>
 {% endmacro %}
