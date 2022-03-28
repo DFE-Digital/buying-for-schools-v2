@@ -10,7 +10,7 @@
     {% if result %}
       <h2>{{ result }}</h2>
     {% else %}  
-      <form action="{{ currentUrl }}">
+      <form>
         {{ prefix }}
         {{ govukRadios(radioOptions) }}
         {{ suffix | safe }}
