@@ -13,7 +13,7 @@ const nunjucksConfig = app => {
   })
 
   app.use((req, res, next) => {
-    env.addGlobal("currentUrl", req.protocol + '://' + req.get('host') + req.originalUrl)
+    env.addGlobal("currentUrl", 'https://' + req.get('host') + req.originalUrl)
     env.addGlobal("docStatus", app.locals.db.docStatus)
     next()
   })
