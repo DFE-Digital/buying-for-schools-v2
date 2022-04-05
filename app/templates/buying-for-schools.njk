@@ -7,6 +7,7 @@
 {% from "warning-text/macro.njk" import govukWarningText %}
 {% from "error-summary/macro.njk" import govukErrorSummary %}
 {% from "footer/macro.njk" import govukFooter %}
+{% from "macros/faf-link.njk" import requestSupportPageHref %}
 
 {% extends "template.njk" %}
 
@@ -121,9 +122,7 @@
           text: "Cookies"
         },
         {
-          href: "https://www.get-help-buying-for-schools.service.gov.uk/procurement-support?referred_by=" + currentUrl | base64Encode 
-            if locals.db.docStatus == "LIVE"
-            else "https://staging-get-help-buying-for-schools.education.gov.uk/procurement-support?referred_by=" + currentUrl | base64Encode,
+          href: requestSupportPageHref(page='Page footer'),
           text: "Request advice and guidance",
           attributes: {
             target: "_blank"
