@@ -1,0 +1,13 @@
+{% macro questionStep(radioOptions) %}
+  {% if radioOptions.fieldset.legend.text == "What are you buying?" %}
+    "GoodsOrServices"
+  {% elif radioOptions.fieldset.legend.text == "What services do you need?" %}
+    "Category"
+  {% elif radioOptions.fieldset.legend.text == "What goods do you need?" %}
+    "Category"
+  {% elif "What goods are you looking for in" in radioOptions.fieldset.legend.text %}
+    "SubCategory"
+  {% elif "What services are you looking for in" in radioOptions.fieldset.legend.text %}
+    "SubCategory"
+  {% endif %}
+{% endmacro %}

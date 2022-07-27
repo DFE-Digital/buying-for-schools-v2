@@ -22,9 +22,17 @@
         }) }}
 
         {{ fafLink(optionalClass="govuk-!-margin-top-4", page="Interruption page") }}
-        
+
       </div>
 
     </div>
   </div>
+{% endblock %}
+
+{% block bodyEnd %}
+  {{ super() }}
+
+  <script>
+    trackUserJourneyFunnel('Guidance-FrameworkSelection');
+  </script>
 {% endblock %}

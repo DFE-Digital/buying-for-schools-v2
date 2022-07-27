@@ -28,8 +28,6 @@
           <li>may have draft specifications and help available</li>
         </ul>
 
-
-
         {{ govukButton({
             text: 'Continue',
             href: '/selection',
@@ -42,4 +40,12 @@
 
     </div>
   </div>
+{% endblock %}
+
+{% block bodyEnd %}
+  {{ super() }}
+
+  <script>
+    trackUserJourneyFunnel('Guidance-Benefits');
+  </script>
 {% endblock %}

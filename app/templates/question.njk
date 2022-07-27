@@ -1,4 +1,5 @@
 {% extends "buying-for-schools.njk" %}
+{% import "macros/userJourneyFunnel.njk" as userJourneyFunnel %}
 
 {% block content %}
 <div class="govuk-grid-row">
@@ -9,7 +10,7 @@
 
     {% if result %}
       <h2>{{ result }}</h2>
-    {% else %}  
+    {% else %}
       <form action="{{ currentUrl }}">
         {{ prefix }}
         {{ govukRadios(radioOptions) }}
@@ -21,4 +22,12 @@
     {% include "summary.njk" %}
   </div>
 </div>
+{% endblock %}
+
+{% block bodyEnd %}
+  {{ super() }}
+
+  <script>
+    trackUserJourneyFunnel({{ userJourneyFunnel.questionStep(radioOptions) }});
+  </script>
 {% endblock %}

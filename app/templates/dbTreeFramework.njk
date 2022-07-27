@@ -25,7 +25,7 @@
     </ul>
 
     {{ results.button(providerShort, url) }}
-    
+
     {{ fafLink(page="Framework outcome page") }}
 
     {% include "summary.njk" %}
@@ -50,4 +50,12 @@
 
 </div>
 
+{% endblock %}
+
+{% block bodyEnd %}
+  {{ super() }}
+
+  <script>
+    trackUserJourneyFunnel('FrameworkDetails');
+  </script>
 {% endblock %}

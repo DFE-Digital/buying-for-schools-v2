@@ -2,8 +2,15 @@
 
 var doSurvey = document.getElementById('mainscript').getAttribute('data-survey') === 'true'
 
+function trackUserJourneyFunnel(stage) {
+  if (window.ga === undefined)
+    console.log("Tracking: /UserJourneyFunnel/"+stage)
+  else
+    window.ga('send', 'pageview', '/UserJourneyFunnel/'+stage);
+}
+
 function getCookie(name) {
-  function escape(s) { 
+  function escape(s) {
     return s.replace(/([.*+?\^${}()|\[\]\/\\])/g, '\\$1')
   }
   var match = document.cookie.match(RegExp('(?:^|;\\s*)' + escape(name) + '=([^;]*)'))
@@ -71,7 +78,7 @@ if (consentCookie === 'yes') {
   var cookieRejectConfirmation = document.querySelector('.js-cookies-rejected');
   var hideBannerButton = document.querySelectorAll('.js-hide-cookie-banner');
   var hideBannerIndex;
-  
+
   function setupBannerClose(idx) {
     hideBannerButton[idx].addEventListener('click', function() {
       cookieBanner.setAttribute('hidden', '');
@@ -115,7 +122,7 @@ if (consentCookie === 'yes') {
   var saveSettingsButton = document.querySelector('.js-save-cookie-settings');
   var successMsg = document.querySelector('.js-cookie-success');
   var choices = document.querySelector('.js-cookie-choices');
-  
+
   function success(){
     successMsg.style.display = 'block';
     choices.style.display = 'none';
@@ -194,7 +201,7 @@ var getPostServiceSurveyUrl = function (psbo_url) {
   // { psbo, psbo_url, uid }
   var surveyUrl = 'https://paperstudio.typeform.com/to/z6cuin?'
   surveyUrl += 'uid=' + uid
-  surveyUrl += '&psbo_url=' + encodeURI(psbo_url) 
+  surveyUrl += '&psbo_url=' + encodeURI(psbo_url)
   surveyUrl += '&psbo=' + document.getElementById('supplier').innerHTML
   return surveyUrl
 }
@@ -202,7 +209,7 @@ var getPostServiceSurveyUrl = function (psbo_url) {
 // handler for psbo outbound links, track in GA and do post service survey
 var getOutboundLink = function(e) {
   e.preventDefault()
-  
+
   var psbo_url = e.target.href
   var url = (uid && doSurvey) ? getPostServiceSurveyUrl(psbo_url) : psbo_url
   clearCookie('uid')
