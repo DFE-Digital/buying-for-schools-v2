@@ -2,6 +2,7 @@
 {% import "macros/userJourneyFunnel.njk" as userJourneyFunnel %}
 
 {% block content %}
+<div data-funnel-step={{ userJourneyFunnel.questionStep(radioOptions) }}></div>
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
     {% if err %}
@@ -22,12 +23,4 @@
     {% include "summary.njk" %}
   </div>
 </div>
-{% endblock %}
-
-{% block bodyEnd %}
-  {{ super() }}
-
-  <script>
-    trackUserJourneyFunnel({{ userJourneyFunnel.questionStep(radioOptions) }});
-  </script>
 {% endblock %}

@@ -2,13 +2,6 @@
 
 var doSurvey = document.getElementById('mainscript').getAttribute('data-survey') === 'true'
 
-function trackUserJourneyFunnel(stage) {
-  if (window.ga === undefined)
-    console.log("Tracking: /UserJourneyFunnel/"+stage)
-  else
-    window.ga('send', 'pageview', '/UserJourneyFunnel/'+stage);
-}
-
 function getCookie(name) {
   function escape(s) {
     return s.replace(/([.*+?\^${}()|\[\]\/\\])/g, '\\$1')
