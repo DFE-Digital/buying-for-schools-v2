@@ -5,16 +5,16 @@
 {% set mainClasses = "govuk-main-wrapper--l" %}
 
 {% block content %}
-  <div class="govuk-grid-row">
+  <div class="govuk-grid-row" data-funnel-step="Guidance-After">
     <div class="govuk-grid-column-full">
 
       <div class="flash-card">
         <h1 class="govuk-heading-xl govuk-!-margin-bottom-7">After you’ve used the service</h1>
-        
+
         <p class="govuk-body">When you&rsquo;ve answered the relevant questions, you&rsquo;ll be given the most suitable framework based on your answers. This will point you to the providers&rsquo; website where you can get quotes from suppliers on the framework.</p>
 
         <h2 class="govuk-heading-m">If you need help</h2>
-        
+
         <p class="govuk-body">The DfE <a href="https://www.gov.uk/guidance/buying-for-schools">buying for schools guidance</a> will help you prepare and research before buying to help you get the best deal and save money.</p>
 
         {{ govukButton({
@@ -24,7 +24,7 @@
         }) }}
 
         {{ fafLink(optionalClass="govuk-!-margin-top-4", page="Interruption page") }}
-        
+
       </div>
 
     </div>

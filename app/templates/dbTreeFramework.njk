@@ -3,7 +3,7 @@
 {% from "macros/faf-link.njk" import fafLink %}
 
 {% block content %}
-<div class="govuk-grid-row">
+<div class="govuk-grid-row" data-funnel-step="FrameworkDetails">
   <div class="govuk-grid-column-full">
     {% block recommendation %}
       <span class="govuk-caption-l">Your recommendation</span>
@@ -25,7 +25,7 @@
     </ul>
 
     {{ results.button(providerShort, url) }}
-    
+
     {{ fafLink(page="Framework outcome page") }}
 
     {% include "summary.njk" %}
