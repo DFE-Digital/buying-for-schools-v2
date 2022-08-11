@@ -21,7 +21,13 @@ const dbFunc = options => {
         doc._id = doc._id.toString()
         doc.framework.forEach(f => {
           f._id = f._id.toString()
+
+          try {
           f.cat = f.cat.toString()
+          } catch(err) {
+            f.cat = "test"
+          }
+
           f.provider = f.provider.toString()
         })
         doc.question.forEach(q => {
