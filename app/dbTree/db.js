@@ -21,7 +21,14 @@ const dbFunc = options => {
         doc._id = doc._id.toString()
         doc.framework.forEach(f => {
           f._id = f._id.toString()
-          f.cat = f.cat.toString()
+
+          // Category can be missing sometimes
+          try {
+            f.cat = f.cat.toString()
+          } catch(err) {
+            f.cat = null;
+          }
+
           f.provider = f.provider.toString()
         })
         doc.question.forEach(q => {
