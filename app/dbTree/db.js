@@ -22,10 +22,11 @@ const dbFunc = options => {
         doc.framework.forEach(f => {
           f._id = f._id.toString()
 
+          // Category can be missing sometimes
           try {
-          f.cat = f.cat.toString()
+            f.cat = f.cat.toString()
           } catch(err) {
-            f.cat = "test"
+            f.cat = null;
           }
 
           f.provider = f.provider.toString()
