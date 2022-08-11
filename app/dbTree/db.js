@@ -26,7 +26,7 @@ const dbFunc = options => {
           try {
             f.cat = f.cat.toString()
           } catch(err) {
-            f.cat = null;
+            f.cat = "-category-not-set-";
           }
 
           f.provider = f.provider.toString()
