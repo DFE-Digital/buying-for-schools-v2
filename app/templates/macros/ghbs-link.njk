@@ -5,13 +5,8 @@
   {{ (prodLink if docStatus == "LIVE" else stagingLink) + ((page + " " + currentUrl) | base64Encode) }}
 {% endmacro %}
 
-{% macro fafLink(optionalClass='', page='') %}
-  <div {% if optionalClass %}
-  class = {{optionalClass}}
-  {% endif %}
-  >
-    <a href={{ requestSupportPageHref(page=page) }} class="govuk-link" target="_blank">
-      Request advice and guidance
-    </a>
+{% macro renderGHBSLink(page='') %}
+  <div class="govuk-inset-text">
+    The DfE <a href="{{ requestSupportPageHref(page=page) }}">Get help buying for schools</a> will help you prepare and research before buying to help you get the best deal and save money.
   </div>
 {% endmacro %}

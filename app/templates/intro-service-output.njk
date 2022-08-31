@@ -1,32 +1,19 @@
 {% extends "buying-for-schools.njk" %}
-{% from "macros/faf-link.njk" import fafLink %}
+{% from "macros/ghbs-link.njk" import renderGHBSLink %}
 
 {# Adds a class to increase vertical spacing for pages without a back button #}
 {% set mainClasses = "govuk-main-wrapper--l" %}
 
 {% block content %}
   <div class="govuk-grid-row">
-    <div class="govuk-grid-column-full">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">After you’ve used the service</h1>
 
-      <div class="flash-card">
-        <h1 class="govuk-heading-xl govuk-!-margin-bottom-7">After you’ve used the service</h1>
-        
-        <p class="govuk-body">When you&rsquo;ve answered the relevant questions, you&rsquo;ll be given the most suitable framework based on your answers. This will point you to the providers&rsquo; website where you can get quotes from suppliers on the framework.</p>
+      {{ renderGHBSLink(page="Interruption page") }}
 
-        <h2 class="govuk-heading-m">If you need help</h2>
-        
-        <p class="govuk-body">The DfE <a href="https://www.gov.uk/guidance/buying-for-schools">buying for schools guidance</a> will help you prepare and research before buying to help you get the best deal and save money.</p>
+      <p class="govuk-body">When you&rsquo;ve answered the relevant questions, you&rsquo;ll be given the most suitable framework based on your answers. This will point you to the providers&rsquo; website where you can get quotes from suppliers on the framework.</p>
 
-        {{ govukButton({
-            text: 'Continue',
-            href: locals.frameworkPath,
-            classes: 'govuk-!-margin-bottom-0'
-        }) }}
-
-        {{ fafLink(optionalClass="govuk-!-margin-top-4", page="Interruption page") }}
-        
-      </div>
-
+      {{ govukButton({ text: 'Continue', href: locals.frameworkPath }) }}
     </div>
   </div>
 {% endblock %}

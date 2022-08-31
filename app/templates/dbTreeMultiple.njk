@@ -1,11 +1,13 @@
 {% extends "buying-for-schools.njk" %}
-{% from "macros/faf-link.njk" import fafLink %}
+{% from "macros/ghbs-link.njk" import renderGHBSLink %}
 
 {% block content %}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <h1 class="govuk-heading-l govuk-!-margin-bottom-3">Matching frameworks</h1>
-    <p class="govuk-body-l govuk-!-margin-bottom-6">Based on your answers, there are multiple approved frameworks to choose from.</p>
+    <h1 class="govuk-heading-l">Matching frameworks</h1>
+    <p class="govuk-body-l">Based on your answers, there are multiple approved frameworks to choose from.</p>
+
+    {{ renderGHBSLink(page="Framework outcome page") }}
 
     {% for item in resultList %}
       <dl class="card">
@@ -22,9 +24,6 @@
     {% endfor %}
 
     {% include "summary.njk" %}
-    
-    {{ fafLink(page="Framework outcome page") }}
-
   </div>
 </div>
 
