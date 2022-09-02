@@ -153,6 +153,7 @@
 
       if (window.cookie_consent) {
         setGA();
+        window.dataLayer.push({ 'designVariant': "{{ designVariant }}", 'event': 'designViewed' })
       }
     })(window,document,'script','dataLayer','GTM-K62TK98');
   </script>
