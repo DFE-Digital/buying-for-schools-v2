@@ -1,18 +1,18 @@
 {% extends "result.njk" %}
 {% import "macros/results.njk" as results %}
-{% from "macros/faf-link.njk" import fafLink %}
+{% from "macros/ghbs-link.njk" import renderGHBSLink %}
 
 {% block content %}
 <div class="govuk-grid-row">
-  <div class="govuk-grid-column-full">
+  <div class="govuk-grid-column-two-thirds">
     {% block recommendation %}
       <span class="govuk-caption-l">Your recommendation</span>
       <h1 class="govuk-heading-l govuk-!-margin-bottom-3" id="resulttitle">{{ title }}</h1>
       <p class="govuk-body-l govuk-!-margin-bottom-6">Based on your answers, we think you should use the {{ providerFull }} framework.</p>
     {% endblock %}
-  </div>
 
-  <div class="govuk-grid-column-two-thirds">
+    {{ renderGHBSLink(page="Framework outcome page") }}
+
     <div class="govuk-markdown">
       {{ body | safe }}
     </div>
@@ -25,8 +25,6 @@
     </ul>
 
     {{ results.button(providerShort, url) }}
-    
-    {{ fafLink(page="Framework outcome page") }}
 
     {% include "summary.njk" %}
   </div>

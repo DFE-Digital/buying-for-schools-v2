@@ -1,30 +1,21 @@
 {% extends "buying-for-schools.njk" %}
-{% from "macros/faf-link.njk" import fafLink %}
+{% from "macros/ghbs-link.njk" import renderGHBSLink %}
 
 {# Adds a class to increase vertical spacing for pages without a back button #}
 {% set mainClasses = "govuk-main-wrapper--l" %}
 
 {% block content %}
   <div class="govuk-grid-row">
-    <div class="govuk-grid-column-full">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">How frameworks are selected</h1>
 
-      <div class="flash-card">
-        <h1 class="govuk-heading-xl govuk-!-margin-bottom-7">How frameworks are selected</h1>
+      {{ renderGHBSLink(page="Interruption page") }}
 
-        <p class="govuk-body">The Schools Commercial Team (SCT) within DfE reviews a range of frameworks. These frameworks are assessed for compliance with procurement regulations, ease of use, suitability and value for money. Feedback from schools is also considered when selecting frameworks.</p>
+      <p class="govuk-body">The Schools Commercial Team (SCT) within DfE reviews a range of frameworks. These frameworks are assessed for compliance with procurement regulations, ease of use, suitability and value for money. Feedback from schools is also considered when selecting frameworks.</p>
 
-        <p class="govuk-body">SCT continues to review and add to the list of recommended frameworks.</p>
+      <p class="govuk-body">SCT continues to review and add to the list of recommended frameworks.</p>
 
-        {{ govukButton({
-            text: 'Continue',
-            href: '/service-output',
-            classes: 'govuk-!-margin-bottom-0'
-        }) }}
-
-        {{ fafLink(optionalClass="govuk-!-margin-top-4", page="Interruption page") }}
-        
-      </div>
-
+      {{ govukButton({ text: 'Continue', href: '/service-output' }) }}
     </div>
   </div>
 {% endblock %}
