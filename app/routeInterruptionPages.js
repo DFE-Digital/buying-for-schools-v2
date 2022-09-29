@@ -7,7 +7,10 @@ const nunjucks = require("nunjucks")
 const route = (app) => {
   interruptionPages.forEach(interruptionPage => {
     app.get(interruptionPage.redirectPath, (req, res, next) => {
-      return res.send(nunjucks.render(interruptionPage.template))
+      return res.send(nunjucks.render(interruptionPage.template, {
+        locals: app.locals,
+        pageTitle: interruptionPage.title
+      }))
     })
   })
 }
