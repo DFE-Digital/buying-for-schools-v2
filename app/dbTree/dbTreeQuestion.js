@@ -2,6 +2,7 @@ const urljoin = require('url-join')
 const url = require('url')
 const nunjucks = require('nunjucks')
 const utils = require('./utils')
+const interruptionPages = require("../interruptionPages")
 
 const dbTreeQuestion = app => (question, urlInfo, summary) => {
   const id = 'decision-tree-' + question.ref
@@ -27,12 +28,14 @@ const dbTreeQuestion = app => (question, urlInfo, summary) => {
   })
 
   radioOptions.items = options.map(option => {
-    const optionUrl = urljoin(urlInfo.pathname, option.ref)
-    const optionHint = option.hint
+    const optionUrl = urljoin(urlInfo.baseUrl, urlInfo.pathname, option.ref)
+    // If the page has an interrupt, use that path as value instead
+    const value = interruptionPages.getInterruptionPath(optionUrl) || optionUrl
+
     return {
-      value: urljoin(urlInfo.baseUrl, optionUrl),
+      value,
       text: option.title,
-      hint: optionHint ? { text: optionHint } : null
+      hint: option.hint ? { text: option.hint } : null
     }
   })
 
