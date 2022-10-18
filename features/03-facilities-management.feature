@@ -6,7 +6,7 @@ Feature: Facilities management
       | Heading | What services do you need?  |
       | submit  | Continue                    |
     And have radio buttons
-      | Energy and utilities              | /find/type/on-going/services-categories/energy        |
+      | Energy and utilities              | /interruptions/rising-energy-prices                   |
       | Facilities management and estates | /find/type/on-going/services-categories/facilities    |
       | Financial                         | /find/type/on-going/services-categories/financial     |
       | ICT                               | /find/type/on-going/services-categories/ict           |

@@ -27,6 +27,14 @@ const getIntroPages = () => {
       path: '/cookies',
       title: 'Cookies',
       tpl: 'cookies.njk'
+    },
+
+
+    // Other pages
+    {
+      path: '/pages/rising-energy-prices',
+      title: 'What you can do about rising energy prices',
+      tpl: 'pages/rising-energy-prices.njk'
     }
   ]
 

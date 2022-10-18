@@ -27,6 +27,9 @@ app.use((req, res, next) => {
   next()
 })
 
+const routeInterruptionPages = require('./routeInterruptionPages')
+routeInterruptionPages.route(app)
+
 const routeIntroPages = require('./routeIntroPages')
 routeIntroPages.route(app)
 
@@ -39,11 +42,9 @@ const dbList = require('./dbTree/dbList')(app)
 app.use(frameworkPath, dbTree.handleRequest)
 app.use(listPath, dbList.handleRequest)
 
-
 app.get('/framework', (req, res) => {
   return res.redirect(302, '/list')
 })
-
 
 app.get('*', (req, res) => {
   const render = nunjucks.render('404.njk')
