@@ -12,7 +12,7 @@
     "test:bdd": "./node_modules/.bin/cucumber-js -f node_modules/cucumber-pretty --exit",
     "test:load": "artillery run loadtest.yml -o loadtest-report.json",
     "test:loadreport": "artillery report loadtest-report.json",
-    "test:mocha": "nyc mocha app/dbTree/tests/*.test.js --exit"
+    "test:mocha": "nyc mocha app/**/tests/*.test.js --exit"
   },
   "jshintConfig": {
     "asi": true,
@@ -22,6 +22,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cookie-parser": "^1.4.6",
     "express": "^4.17.1",
     "express-basic-auth": "^1.2.0",
     "govuk-frontend": "^3.11.0",

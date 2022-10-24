@@ -1,5 +1,6 @@
 const express = require('express')
 const serveStatic = require('serve-static')
+const cookieParser = require('cookie-parser')
 const port = process.env.PORT || 4000
 const app = express()
 
@@ -12,6 +13,8 @@ app.locals = {
   serviceName,
   frameworkPath
 }
+
+app.use(cookieParser())
 
 const nunjucks = require('./nunjucksConfig')(app)
 

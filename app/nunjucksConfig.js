@@ -1,5 +1,6 @@
 const path = require('path')
 const nunjucks = require('nunjucks')
+const userJourney = require('./services/userJourney')
 
 const nunjucksConfig = app => {
   nunjucks.configure(path.resolve(__dirname, './templates'))
@@ -16,6 +17,7 @@ const nunjucksConfig = app => {
     env.addGlobal("currentUrl", 'https://' + req.get('host') + req.originalUrl)
     env.addGlobal("docStatus", app.locals.db.docStatus)
     env.addGlobal("designVariant", process.env.VARIANT || 'baseline')
+    env.addGlobal("sessionId", userJourney.readOrCreateSessionId(req, res))
     next()
   })
 
