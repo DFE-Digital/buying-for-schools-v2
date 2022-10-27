@@ -57,7 +57,8 @@ function recordStep(req, res) {
   const payload = {
     sessionId: service.readOrCreateSessionId(req, res),
     productSection: "faf",
-    stepDescription: req.originalUrl
+    stepDescription: req.originalUrl,
+    referralCampaign: req.query.referral_campaign
   };
 
   service.post(payload);
