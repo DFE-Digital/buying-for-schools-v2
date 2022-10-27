@@ -36,7 +36,12 @@ const getIntroPages = () => {
       path: '/pages/rising-energy-prices',
       title: 'What you can do about rising energy prices',
       tpl: 'pages/rising-energy-prices.njk'
-    }
+    },
+    {
+      path: '/pages/energy-bill-relief-scheme',
+      title: 'Energy Bill Relief Scheme',
+      tpl: 'pages/energy-bill-relief-scheme.njk'
+    },
   ]
 
   return introPages
