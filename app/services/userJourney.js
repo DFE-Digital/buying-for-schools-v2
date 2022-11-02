@@ -12,7 +12,7 @@ module.exports = service
 
 function getSessionId(req, res) {
   const sessionId = req.cookies.sessionId;
-  const cookieHeader = res.getHeader("set-cookie");
+  const cookieHeader = res.getHeader && res.getHeader("set-cookie");
 
   if (sessionId)
     return sessionId;
