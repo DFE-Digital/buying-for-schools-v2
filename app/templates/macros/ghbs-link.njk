@@ -1,8 +1,10 @@
 {% macro requestSupportPageHref(page='') %}
-  {% set prodLink = "https://www.get-help-buying-for-schools.service.gov.uk/procurement-support?referred_by=" %}
-  {% set stagingLink = "https://staging-get-help-buying-for-schools.education.gov.uk/procurement-support?referred_by=" %}
+  {% set prodLink = "https://www.get-help-buying-for-schools.service.gov.uk/procurement-support?" %}
+  {% set stagingLink = "https://staging-get-help-buying-for-schools.education.gov.uk/procurement-support?" %}
+  {% set referred_by = "referred_by=" + (page + " " + currentUrl) | base64Encode %}
+  {% set session_id = "session_id=" + sessionId %}
 
-  {{ (prodLink if docStatus == "LIVE" else stagingLink) + ((page + " " + currentUrl) | base64Encode) }}
+  {{ (prodLink if docStatus == "LIVE" else stagingLink) + referred_by + "&" + session_id }}
 {% endmacro %}
 
 {% macro renderGHBSLink(page='') %}
