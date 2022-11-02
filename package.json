@@ -16,7 +16,7 @@
   },
   "jshintConfig": {
     "asi": true,
-    "esversion": 11,
+    "esversion": 9,
     "maxcomplexity": 8
   },
   "author": "",
