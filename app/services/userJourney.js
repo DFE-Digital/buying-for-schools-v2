@@ -11,7 +11,15 @@ var service = {
 module.exports = service
 
 function getSessionId(req, res) {
-  return req.cookies.sessionId || res.getHeader("set-cookie")?.match(/sessionId=(.+);/)[1];
+  const sessionId = req.cookies.sessionId;
+  const cookieHeader = res.getHeader("set-cookie");
+
+  if (sessionId)
+    return sessionId;
+  else if (cookieHeader)
+    return cookieHeader.match(/sessionId=(.+);/)[1];
+  else
+    return undefined;
 }
 
 function setSessionId(res) {
@@ -40,7 +48,7 @@ function post(payload) {
       "Authorization": `Token ${process.env.GHBS_WEBHOOK_SECRET}`
     }
   };
-  
+
   const req = https.request(process.env.GHBS_USER_JOURNEY_ENDPOINT, options, res => {
     console.log(`statusCode: ${res.statusCode}`);
   });
