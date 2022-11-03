@@ -3,7 +3,6 @@ const url = require('url')
 const path = require('path')
 const utils = require('./utils')
 const nunjucks = require('nunjucks')
-const userJourney = require('../services/userJourney')
 
 const dbTree = app => {
   const me = {}
@@ -41,13 +40,11 @@ const dbTree = app => {
         if (lastPairDetail.framework) {
           // render a single framework
           const populated = utils.populateFramework(doc, lastPairDetail.framework)
-          userJourney.recordStep(req, res)
           return res.send(me.dbTreeFramework(populated, summary))
         }
 
         if (lastPairDetail.question && !lastPairDetail.answer) {
           // render unanswered question
-          userJourney.recordStep(req, res)
           return res.send(me.dbTreeQuestion(lastPairDetail.question, urlInfo, summary))
         }
 
@@ -67,7 +64,6 @@ const dbTree = app => {
           // render multiple frameworks
           const frameworks = doc.framework.filter(f => lastPairDetail.answer.result.includes(f._id))
           const populated = frameworks.map(f => utils.populateFramework(doc, f))
-          userJourney.recordStep(req, res)
           return res.send(me.dbTreeMultiple(populated, urlInfo, summary))
         }
 

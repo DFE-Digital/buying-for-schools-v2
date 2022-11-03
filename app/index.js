@@ -1,6 +1,8 @@
 const express = require('express')
 const serveStatic = require('serve-static')
 const cookieParser = require('cookie-parser')
+const device = require('express-device')
+const userJourney = require('./services/userJourney')
 const port = process.env.PORT || 4000
 const app = express()
 
@@ -15,6 +17,7 @@ app.locals = {
 }
 
 app.use(cookieParser())
+app.use(device.capture())
 
 const nunjucks = require('./nunjucksConfig')(app)
 
@@ -27,6 +30,10 @@ app.use((req, res, next) => {
     res.send(render)
     return
   }
+
+  if (req.device.type === 'desktop')
+    userJourney.recordStep(req, res)
+
   next()
 })
 

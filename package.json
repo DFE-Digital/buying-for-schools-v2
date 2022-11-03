@@ -25,6 +25,7 @@
     "cookie-parser": "^1.4.6",
     "express": "^4.17.1",
     "express-basic-auth": "^1.2.0",
+    "express-device": "^0.4.2",
     "govuk-frontend": "^3.11.0",
     "gulp": "^4.0.2",
     "gulp-cli": "^2.2.0",

@@ -1,6 +1,5 @@
 
 const nunjucks = require('nunjucks')
-const userJourney = require('./services/userJourney')
 
 const getIntroPages = () => {
   const introPages = [
@@ -50,7 +49,6 @@ const getIntroPages = () => {
 const routeIntroPages = (app, pages) => {
   pages.forEach(page => {
     app.get(page.path, (req, res) => {
-      userJourney.recordStep(req, res);
       const render = nunjucks.render(page.tpl, {
         locals: app.locals,
         pageTitle: page.title
