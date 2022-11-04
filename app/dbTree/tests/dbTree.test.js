@@ -39,17 +39,6 @@ const getDbTree = () => {
 
 describe('dbTree', () => {
   describe('handleRequest', () => {
-    var userJourneyStub
-
-    beforeEach(() => {
-      const userJourney = require('../../services/userJourney')
-      userJourneyStub = sinon.stub(userJourney, 'recordStep')
-    })
-
-    afterEach(() => {
-      userJourneyStub.restore()
-    })
-
     it('should redirect to the correct page if a query string property of decision-tree exists', () => {
       const testRes = getRes()
       const dbTree = getDbTree()
@@ -80,7 +69,6 @@ describe('dbTree', () => {
           expect(renderedFramework.title).to.equal(testStructure.framework[0].title)
           expect(renderedFramework.provider).to.have.property('initials')
           expect(renderedFramework.provider).to.have.property('title')
-          expect(userJourneyStub.calledOnce).to.be.true
           done()
         })
     })
@@ -93,7 +81,6 @@ describe('dbTree', () => {
       }, testRes)
         .finally(() => {
           expect(dbTree.dbTreeQuestion.called).to.be.true
-          expect(userJourneyStub.calledOnce).to.be.true
           done()
         })
     })
@@ -109,7 +96,6 @@ describe('dbTree', () => {
           expect(testRes.redirect.called).to.be.true
           expect(testRes.redirect.lastCall.args[0]).to.equal(302)
           expect(testRes.redirect.lastCall.args[1]).to.equal('/alpha/type/buying/what/books-media/class-library')
-          expect(userJourneyStub.calledOnce).to.be.false
           done()
         })
     })
@@ -125,7 +111,6 @@ describe('dbTree', () => {
           expect(testRes.redirect.called).to.be.true
           expect(testRes.redirect.lastCall.args[0]).to.equal(302)
           expect(testRes.redirect.lastCall.args[1]).to.equal('/alpha/type/buying/what/books-media/class-library/classroom/books')
-          expect(userJourneyStub.calledOnce).to.be.false
           done()
         })
     })
@@ -139,7 +124,6 @@ describe('dbTree', () => {
       }, testRes)
         .finally(() => {
           expect(dbTree.dbTreeMultiple.called).to.be.true
-          expect(userJourneyStub.calledOnce).to.be.true
           done()
         })
     })
@@ -152,7 +136,6 @@ describe('dbTree', () => {
       }, testRes)
         .finally(() => {
           expect(dbTree.dbTreeFramework.called).to.be.true
-          expect(userJourneyStub.calledOnce).to.be.true
           done()
         })
     })
@@ -165,7 +148,6 @@ describe('dbTree', () => {
       }, testRes)
         .finally(() => {
           expect(testRes.status.lastCall.args[0]).to.equal(404)
-          expect(userJourneyStub.calledOnce).to.be.false
           done()
         })
     })
@@ -184,7 +166,6 @@ describe('dbTree', () => {
           dbTree.handleRequest({ url }, testRes)
             .finally(() => {
               expect(testRes.status.lastCall.args[0]).to.equal(404)
-              expect(userJourneyStub.calledOnce).to.be.false
               done()
             })
         })
@@ -202,7 +183,6 @@ describe('dbTree', () => {
           expect(testRes.status.lastCall.args[0]).to.equal(404)
           expect(testRes.send.called).to.be.true
           expect(nunjucks.render.lastCall.args[0]).to.equal('404.njk')
-          expect(userJourneyStub.calledOnce).to.be.false
           done()
         })
     })
@@ -216,7 +196,6 @@ describe('dbTree', () => {
       }, testRes)
         .finally(() => {
           expect(testRes.send.called).to.be.true
-          expect(userJourneyStub.calledOnce).to.be.false
           done()
         })
     })
