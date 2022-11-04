@@ -31,7 +31,7 @@ app.use((req, res, next) => {
     return
   }
 
-  if (req.device.type === 'desktop')
+  if (req.device.type === 'desktop' && !req.url.match(/favicon\.ico/))
     userJourney.recordStep(req, res)
 
   next()
