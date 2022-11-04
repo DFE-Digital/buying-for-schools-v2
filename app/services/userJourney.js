@@ -1,4 +1,5 @@
 const crypto = require("crypto");
+const url = require('url');
 
 var service = {
   getSessionId: getSessionId,
@@ -65,7 +66,7 @@ function recordStep(req, res) {
   const payload = {
     sessionId: service.readOrCreateSessionId(req, res),
     productSection: "faf",
-    stepDescription: req.originalUrl,
+    stepDescription: url.parse(req.url).pathname,
     referralCampaign: req.query.referral_campaign
   };
 
