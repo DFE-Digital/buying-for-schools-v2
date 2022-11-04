@@ -31,10 +31,16 @@ app.use((req, res, next) => {
     return
   }
 
-  if (req.device.type === 'desktop' && !req.url.match(/favicon\.ico/))
-    userJourney.recordStep(req, res)
-
   next()
+
+  if (
+    req.device.type === 'desktop' &&
+    !req.url.match(/favicon\.ico/) &&
+    res.statusCode >= 200 &&
+    res.statusCode < 400
+  ) {
+    userJourney.recordStep(req, res)
+  }
 })
 
 const routeInterruptionPages = require('./routeInterruptionPages')
