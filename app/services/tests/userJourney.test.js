@@ -135,7 +135,7 @@ describe('userJourney', () => {
       readOrCreateSessionId = sinon.stub(userJourney, 'readOrCreateSessionId').returns('21e9fe4a-a575-45f5-9a75-fc92dbfd1dc3')
       post = sinon.stub(userJourney, 'post')
       const req = {
-        url: 'http://www.test.com/this/is/a/test',
+        originalUrl: 'http://www.test.com/this/is/a/test',
         query: { referral_campaign: 'testCampaign' }
       }
       const res = {}

@@ -66,7 +66,7 @@ function recordStep(req, res) {
   const payload = {
     sessionId: service.readOrCreateSessionId(req, res),
     productSection: "faf",
-    stepDescription: url.parse(req.url).pathname,
+    stepDescription: url.parse(req.originalUrl).pathname,
     referralCampaign: req.query.referral_campaign
   };
 
