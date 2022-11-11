@@ -37,7 +37,8 @@ app.use((req, res, next) => {
     req.device.type === 'desktop' &&
     !req.url.match(/favicon\.ico/) &&
     res.statusCode >= 200 &&
-    res.statusCode < 400
+    res.statusCode < 400 &&
+    req.method === 'GET'
   ) {
     userJourney.recordStep(req, res)
   }
