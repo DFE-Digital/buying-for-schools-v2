@@ -50,7 +50,7 @@
     "cucumber-pretty": "^1.5.2",
     "gulp-nodemon": "^2.5.0",
     "jshint": "^2.10.1",
-    "mocha": "^6.2.0",
+    "mocha": "^10.2.0",
     "nyc": "^14.1.1",
     "sinon": "^7.3.2",
     "standard": "^13.1.0"
