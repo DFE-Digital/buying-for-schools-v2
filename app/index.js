@@ -16,6 +16,7 @@ app.locals = {
   frameworkPath
 }
 
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser())
 app.use(device.capture())
 
