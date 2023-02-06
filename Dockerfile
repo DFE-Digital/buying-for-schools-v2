@@ -8,7 +8,10 @@ WORKDIR /usr/src/app
 # where available (npm@5+)
 COPY package*.json ./
 
-RUN npm install --production --no-optional
+RUN npm install --production --no-optional && \
+    # change ownership of node_modules to prevent high file UIDs
+    # https://azureossd.github.io/2022/06/30/Docker-User-Namespace-remapping-issues/index.html#npm-specific-issues-causing-userns-remap-exceptions
+    find ./node_modules/ ! -user root | xargs chown root:root
 
 # Bundle app source
 COPY app/ ./app
