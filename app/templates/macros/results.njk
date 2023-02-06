@@ -1,4 +1,6 @@
 {% from "button/macro.njk" import govukButton %}
+{% from "radios/macro.njk" import govukRadios %}
+{% from "error-summary/macro.njk" import govukErrorSummary %}
 
 {% macro recommendation(title, text) %}
     <span class="govuk-caption-l">Your recommendation</span>
@@ -42,6 +44,44 @@
     href: href,
     classes: 'govuk-!-margin-top-5 frameworkbutton--external'
   }) }}
+{% endmacro %}
+
+{% macro help_form(yes_url, no_url, err) %}
+  {% set radioOptions = {
+    name: "would-you-like-help-with-framework",
+    fieldset: {
+      legend: {
+        text: "Would you like help with this framework from the DfE?",
+        classes: "govuk-fieldset__legend--m"
+      }
+    },
+    items: [
+      {
+        value: yes_url,
+        text: "Yes, I'd like help with how to use this framework"
+      },
+      {
+        value: no_url,
+        text: "No, I want to find out more about the framework from the provider's website"
+      }
+    ]
+  }%}
+  {% if err %}
+    {% set radioOptions = radioOptions | setAttribute("errorMessage", { text: err }) %}
+    {{ govukErrorSummary({
+      titleText: "There is a problem",
+      errorList: [
+        {
+          text: err,
+          href: "#would-you-like-help-with-framework"
+        }
+      ]
+    }) }}
+  {% endif %}
+  <form action="{{ currentUrl }}" method="post" name="would-you-like-help-form">
+    {{ govukRadios(radioOptions) }}
+    <input class="govuk-button" type="submit" value="Continue" name="submit">
+  </form>
 {% endmacro %}
 
 {% macro cards(items) %}
