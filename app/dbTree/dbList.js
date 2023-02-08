@@ -22,12 +22,12 @@ const dbList = app => {
     return renderedResult
   }
 
-  me.frameworkPage = (doc, ref) => {
+  me.frameworkPage = (doc, ref, helpFormError) => {
     const framework = doc.framework.find(f => f.ref === ref)
     if (!framework) {
       return null
     }
-    return me.dbTreeFramework(utils.populateFramework(doc, framework))
+    return me.dbTreeFramework(utils.populateFramework(doc, framework), helpFormError)
   }
 
   me.handleRequest = (req, res) => {
@@ -39,7 +39,13 @@ const dbList = app => {
       }
 
       const ref = urlInfo.pathname.substr(1)
-      const render = me.frameworkPage(doc, ref)
+      let helpFormError
+      if (req.body && req.body.submit) {
+        const redirectUrl = req.body["would-you-like-help-with-framework"]
+        if (redirectUrl) return res.redirect(redirectUrl)
+        helpFormError = "Select whether you would like help with this framework"
+      }
+      const render = me.frameworkPage(doc, ref, helpFormError)
       if (!render) {
         console.log('404')
         return res.status(404).send(nunjucks.render('404.njk'))
