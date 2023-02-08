@@ -133,12 +133,14 @@ describe('dbList', () => {
     it('should try to render a specific framework', () => {
       const initialised = dbList({ locals: { db: mockDB } })
       initialised.dbTreeFramework = sinon.spy(f => f)
-      initialised.frameworkPage(testStructure, 'furniture')
+      initialised.frameworkPage(testStructure, 'furniture', 'error')
       const testRender = initialised.dbTreeFramework.lastCall.args[0]
+      const testError = initialised.dbTreeFramework.lastCall.args[1]
       expect(testRender.ref).to.equal('furniture')
       expect(testRender.title).to.equal('Furniture')
       expect(testRender.cat).to.have.property('title', 'Facilities management and estates')
       expect(testRender.provider).to.have.property('title', 'North East Procurement Organisation')
+      expect(testError).to.equal('error')
     })
 
     it('should return null if trying to render a framework which does not exist', () => {
