@@ -1,7 +1,6 @@
 {% extends "result.njk" %}
 {% import "macros/results.njk" as results %}
 {% from "macros/ghbs-link.njk" import renderGHBSLink %}
-{% from "macros/ghbs-link.njk" import requestSupportPageHref %}
 
 {% block content %}
 <div class="govuk-grid-row">
@@ -11,6 +10,8 @@
       <h1 class="govuk-heading-l govuk-!-margin-bottom-3" id="resulttitle">{{ title }}</h1>
       <p class="govuk-body-l govuk-!-margin-bottom-6">Based on your answers, we think you should use the {{ providerFull }} framework.</p>
     {% endblock %}
+
+    {{ renderGHBSLink(page="Framework outcome page") }}
 
     <div class="govuk-markdown">
       {{ body | safe }}
@@ -23,7 +24,7 @@
       <li>pre-agreed terms and conditions</li>
     </ul>
 
-    {{ results.help_form(requestSupportPageHref(page="Recommended framework page") | trim, url, helpFormError) }}
+    {{ results.button(providerShort, url) }}
 
     {% include "summary.njk" %}
   </div>
