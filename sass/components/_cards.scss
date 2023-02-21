@@ -46,8 +46,9 @@
   color: $govuk-link-colour;
 }
 
-.card dt,
-.card dd {
+.card span,
+.card__header div,
+.card__content div {
   float: left;
   @include govuk-text-colour;
   @include govuk-font($size: 19);
@@ -60,11 +61,12 @@
   }
 }
 
-.card dt {
+.card span {
   font-weight: bold;
 }
 
-.card dd {
+.card__header div,
+.card__content div {
   margin-right: govuk-spacing(5);
 
   @media (max-width: 670px) {

@@ -9,19 +9,24 @@
 
     {{ renderGHBSLink(page="Framework outcome page") }}
 
-    {% for item in resultList %}
-      <dl class="card">
-        <a href="{{ item.url }}"></a>
-        <div class="card__header">
-          <dt class="govuk-visually-hidden">Framework name:</dt>
-          <dd class="card__title">{{ item.title }}</dd>
-        </div>
-        <div class="card__content">
-          <dt>Provider:</dt>
-          <dd>{{ item.supplier }}</dd>
-        </div>
-      </dl>
-    {% endfor %}
+    <ul class="govuk-list">
+      {% for item in resultList %}
+        <li>
+          <div class="card">
+            <div class="card__header">
+              <span>Framework name:</span><br>
+              <div class="card__title">
+                <a class="govuk-link" href="{{ item.url }}">{{ item.title }}</a>
+              </div>
+            </div>
+            <div class="card__content">
+              <span>Provider:</span>
+              <div>{{ item.supplier }}</div>
+            </div>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
 
     {% include "summary.njk" %}
   </div>
