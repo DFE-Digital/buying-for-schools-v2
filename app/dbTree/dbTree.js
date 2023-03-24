@@ -27,7 +27,6 @@ const dbTree = app => {
 
     return me.db.getRecord()
       .then(doc => {
-        /* jshint maxcomplexity:11 */
         const pairDetail = utils.getPairDetail(doc, pairs)
         const isValid = utils.validatePairChain(pairDetail)
 
@@ -41,13 +40,7 @@ const dbTree = app => {
         if (lastPairDetail.framework) {
           // render a single framework
           const populated = utils.populateFramework(doc, lastPairDetail.framework)
-          let helpFormError
-          if (req.body && req.body.submit) {
-            const redirectUrl = req.body["would-you-like-help-with-framework"]
-            if (redirectUrl) return res.redirect(redirectUrl)
-            helpFormError = "Select whether you would like help with this framework"
-          }
-          return res.send(me.dbTreeFramework(populated, helpFormError, summary))
+          return res.send(me.dbTreeFramework(populated, summary))
         }
 
         if (lastPairDetail.question && !lastPairDetail.answer) {

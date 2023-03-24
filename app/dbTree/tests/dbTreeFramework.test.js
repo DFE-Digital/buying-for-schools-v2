@@ -9,8 +9,7 @@ const nunjucks = require('nunjucks')
 describe('dbTreeFramework', () => {
   it('should do something', () => {
     nunjucks.render = sinon.spy()
-    const helpFormError = 'error'
-    const testing = dbTreeFramework({ locals: 'these are locals' })(testStructure.framework[0], helpFormError, 'summ')
+    const testing = dbTreeFramework({ locals: 'these are locals' })(testStructure.framework[0], 'summ')
     const template = nunjucks.render.lastCall.args[0]
     const props = nunjucks.render.lastCall.args[1]
     expect(template).to.equal('dbTreeFramework.njk')
@@ -20,6 +19,5 @@ describe('dbTreeFramework', () => {
     expect(props).to.have.property('pageTitle', 'Books and related materials')
     expect(props).to.have.property('url', 'https://www.espo.org/Pages/Books-for-schools-framework-376E-guide')
     expect(props).to.have.property('body', '<h1 id="h1">h1</h1>\n<p>para</p>\n')
-    expect(props).to.have.property('helpFormError', 'error')
   })
 })
