@@ -2,7 +2,7 @@ const nunjucks = require('nunjucks')
 const marked = require('marked')
 const utils = require('./utils')
 
-const dbTreeFramework = app => (framework, helpFormError, summary = '') => {
+const dbTreeFramework = app => (framework, summary = '') => {
   const body = framework.body || ''
   const renderedResult = nunjucks.render('dbTreeFramework.njk', {
     summary,
@@ -13,8 +13,7 @@ const dbTreeFramework = app => (framework, helpFormError, summary = '') => {
     body: marked(body),
     title: framework.title,
     url: framework.url,
-    pageTitle: framework.title,
-    helpFormError: helpFormError
+    pageTitle: framework.title
   })
   return renderedResult
 }
