@@ -60,18 +60,18 @@
   }
 
   .govuk-button {
-    color: govuk-colour("blue");
+    color: govuk-colour("black");
     background-color: govuk-colour("white");
     font-weight: bold;
     min-width: 200px;
 
     &:visited {
-      color: govuk-colour("blue");
+      color: govuk-colour("black");
       background-color: govuk-colour("white");
     }
 
     &:hover, &:active {
-      color: govuk-colour("blue");
+      color: govuk-colour("black");
       background-color: #eee;
     }
   }
