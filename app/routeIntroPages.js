@@ -33,7 +33,7 @@ const getIntroPages = () => {
     // Other pages
     {
       path: '/pages/rising-energy-prices',
-      title: 'What you can do about rising energy prices',
+      title: 'What you can do to reduce energy costs',
       tpl: 'pages/rising-energy-prices.njk'
     },
     {

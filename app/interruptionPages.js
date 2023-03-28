@@ -3,7 +3,7 @@ const list = [
     interruptPath: '/find/type/on-going/services-categories/energy',
     template: 'interruptions/rising-energy-prices.njk',
     redirectPath: '/interruptions/rising-energy-prices',
-    title: 'What you can do about rising energy prices'
+    title: 'What you can do to reduce energy costs'
   }
 ]
 
