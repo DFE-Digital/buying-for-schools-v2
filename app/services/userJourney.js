@@ -23,8 +23,8 @@ function getSessionId(req, res) {
     return undefined;
 }
 
-function setSessionId(res) {
-  const sessionId = crypto.randomUUID();
+function setSessionId(req, res) {
+  const sessionId = req.query.sessionId || crypto.randomUUID();
   res.cookie("sessionId", sessionId);
   return sessionId;
 }
@@ -32,7 +32,7 @@ function setSessionId(res) {
 function readOrCreateSessionId(req, res) {
   var sessionId = service.getSessionId(req, res);
   if (sessionId == null) {
-    sessionId = service.setSessionId(res);
+    sessionId = service.setSessionId(req, res);
   }
   return sessionId;
 }

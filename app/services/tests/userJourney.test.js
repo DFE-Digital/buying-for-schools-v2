@@ -23,16 +23,48 @@ describe('userJourney', () => {
   })
 
   describe('#setSessionId', () => {
-    it('sets the sessionId cookie', () => {
+    let randomUUIDStub
+
+    beforeEach(() => {
+      const crypto = require('crypto')
+      randomUUIDStub = sinon.stub(crypto, 'randomUUID').returns('21e9fe4a-a575-45f5-9a75-fc92dbfd1dc3')
+    })
+
+    afterEach(() => {
+      randomUUIDStub.restore()
+    })
+
+    it('sets the sessionId cookie to a random UUID', () => {
+      const req = {
+        query: {
+          sessionId: null
+        }
+      }
       const res = {
         cookie: sinon.spy()
       }
-      const crypto = require('crypto')
-      const randomUUIDStub = sinon.stub(crypto, 'randomUUID').returns('21e9fe4a-a575-45f5-9a75-fc92dbfd1dc3')
 
-      const sessionId = userJourney.setSessionId(res)
+      const sessionId = userJourney.setSessionId(req, res)
 
       expect(randomUUIDStub.calledOnce).to.be.true
+      expect(res.cookie.calledOnce).to.be.true
+      expect(res.cookie.calledWith('sessionId', '21e9fe4a-a575-45f5-9a75-fc92dbfd1dc3')).to.be.true
+      expect(sessionId).to.equal('21e9fe4a-a575-45f5-9a75-fc92dbfd1dc3')
+    })
+
+    it('sets the sessionId cookie to query param', () => {
+      const req = {
+        query: {
+          sessionId: '21e9fe4a-a575-45f5-9a75-fc92dbfd1dc3'
+        }
+      }
+      const res = {
+        cookie: sinon.spy()
+      }
+
+      const sessionId = userJourney.setSessionId(req, res)
+
+      expect(randomUUIDStub.called).to.be.false
       expect(res.cookie.calledOnce).to.be.true
       expect(res.cookie.calledWith('sessionId', '21e9fe4a-a575-45f5-9a75-fc92dbfd1dc3')).to.be.true
       expect(sessionId).to.equal('21e9fe4a-a575-45f5-9a75-fc92dbfd1dc3')
@@ -76,7 +108,7 @@ describe('userJourney', () => {
         expect(getSessionIdStub.calledOnce).to.be.true
         expect(getSessionIdStub.calledWith(req, res)).to.be.true
         expect(setSessionIdStub.calledOnce).to.be.true
-        expect(setSessionIdStub.calledWith(res)).to.be.true
+        expect(setSessionIdStub.calledWith(req, res)).to.be.true
         expect(sessionId).to.equal('21e9fe4a-a575-45f5-9a75-fc92dbfd1dc3')
       })
     })
