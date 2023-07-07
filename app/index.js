@@ -51,6 +51,9 @@ routeInterruptionPages.route(app)
 const routeIntroPages = require('./routeIntroPages')
 routeIntroPages.route(app)
 
+const frameworkRoutes = require('./routeFrameworks')
+frameworkRoutes.route(app)
+
 app.locals.db = require('./dbTree/db')({
   connectionString: process.env.MONGO_READONLY,
   docStatus: process.env.DOC_STATUS || 'LIVE'
