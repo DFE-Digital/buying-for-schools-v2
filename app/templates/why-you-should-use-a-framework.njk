@@ -1,0 +1,90 @@
+{% extends "buying-for-schools.njk" %}
+{% from "macros/ghbs-link.njk" import renderGHBSLink %}
+
+{# Adds a class to increase vertical spacing for pages without a back button #}
+{% set mainClasses = "govuk-main-wrapper--l" %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">Why you should use a framework</h1>
+
+      <div class="govuk-notification-banner" role="region" aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">
+        <div class="govuk-notification-banner__header">
+          <h2 class="govuk-notification-banner__title" id="govuk-notification-banner-title">
+            Information and advice
+          </h2>
+        </div>
+        <div class="govuk-notification-banner__content">
+          <p class="govuk-notification-banner__heading">
+            <a class="govuk-notification-banner__link" href="pages/rising-energy-prices">What you can do about rising energy prices</a>
+          </p>
+          <p class="govuk-notification-content">Last updated 29 September 2022</p>
+        </div>
+      </div>
+
+      <h2 class="govuk-heading-m">Understand more about framework agreements before you begin</h2>
+
+      <p class="govuk-body">
+        A procurement framework agreement is an agreement put in place with one or more providers of goods and services.
+        It enables buyers to place orders without running full tendering exercises.
+      </p>
+
+      <p class="govuk-body">
+        Buying through a framework agreement can be quicker and easier than getting bids or quotes.
+      </p>
+
+      <p class="govuk-body">
+        Using framework agreements can reduce the number of steps in the buying process.
+      </p>
+
+      <p class="govuk-body">
+        This is because each framework agreement contains:
+      </p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>guidance on how to buy compliantly through the framework</li>
+        <li>details of products, services and suppliers available</li>
+        <li>an agreed pricing structure</li>
+        <li>agreed terms and conditions</li>
+        <li>suppliers have been through a full competitive tender process to join the framework agreement</li>
+        <li>some framework agreements contain draft specifications</li>
+      </ul>
+
+      <p class="govuk-body">
+        Framework agreements have been:
+      </p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>quality checked</li>
+        <li>checked to ensure they comply with the law</li>
+      </ul>
+
+      <h2 class="govuk-heading-m">How framework agreements are selected</h2>
+      <p class="govuk-body">Our list of frameworks are:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>routinely reviewed and updated by DfE procurement specialists</li>
+        <li>assessed for compliance with procurement regulations, ease of use, suitability and value for money</li>
+        <li>selected based on feedback from schools</li>
+      </ul>
+
+      <h2 class="govuk-heading-m">Using this service</h2>
+
+      <p class="govuk-body">
+        Answer a few questions about what you're buying to see framework agreements that we recommend.
+      </p>
+
+      <p class="govuk-body">
+        From there, you can access the framework agreement provider's website to:
+      </p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li>find out more about using the framework agreement</li>
+        <li>find out what to do next, for example write a specification or get quotes from suppliers in the framework</li>
+        <li>get help with your procurement while you use their framework</li>
+      </ul>
+
+      <p class="govuk-body">You can also get free support and advice from a DfE procurement specialist during your procurement, use <a class="govuk-link" href="{{ requestSupportPageHref(page='Why you should use a framework') }}">the Get help buying for schools</a> service.</p>
+
+      {{ govukButton({ text: 'Continue', href: locals.frameworkPath }) }}
+    </div>
+  </div>
+{% endblock %}
