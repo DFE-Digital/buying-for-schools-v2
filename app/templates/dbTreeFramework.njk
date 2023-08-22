@@ -8,10 +8,8 @@
     {% block recommendation %}
       <span class="govuk-caption-l">Your recommendation</span>
       <h1 class="govuk-heading-l govuk-!-margin-bottom-3" id="resulttitle">{{ title }}</h1>
-      <p class="govuk-body-l govuk-!-margin-bottom-6">Based on your answers, we think you should use the {{ providerFull }} framework.</p>
+      <p class="govuk-body-l govuk-!-margin-bottom-6">We think you should use the {{ providerFull }} framework.</p>
     {% endblock %}
-
-    {{ renderGHBSLink(page="Framework outcome page") }}
 
     <div class="govuk-markdown">
       {{ body | safe }}
@@ -27,6 +25,12 @@
     {{ results.button(providerShort, url) }}
 
     {% include "summary.njk" %}
+
+    <div class="govuk-inset-text">
+      If this framework agreement does not matches your needs,
+      or you need advice during your procurement,
+      get free help and support from the <a href="{{ requestSupportPageHref(page='Framework outcome page') }}" class="govuk-link">Get help buying for schools service</a>.
+    </div>
   </div>
 
   <div class="govuk-grid-column-one-third">
