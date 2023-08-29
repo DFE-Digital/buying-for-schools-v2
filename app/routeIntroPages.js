@@ -5,18 +5,8 @@ const getIntroPages = () => {
   const introPages = [
     {
       path: '/',
-      title: 'Benefits of using a framework',
-      tpl: 'intro-benefits.njk'
-    },
-    {
-      path: '/selection',
-      title: 'How frameworks are selected',
-      tpl: 'intro-selection.njk'
-    },
-    {
-      path: '/service-output',
-      title: 'After you’ve used the service',
-      tpl: 'intro-service-output.njk'
+      title: 'Find a DfE approved framework agreement for your school',
+      tpl: 'intro.njk'
     },
     {
       path: '/cookie-details',
