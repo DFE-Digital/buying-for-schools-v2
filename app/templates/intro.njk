@@ -1,0 +1,36 @@
+{% extends "buying-for-schools.njk" %}
+{% from "macros/ghbs-link.njk" import renderGHBSLink %}
+
+{# Adds a class to increase vertical spacing for pages without a back button #}
+{% set mainClasses = "govuk-main-wrapper--l" %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">Find a DfE approved framework agreement for your school</h1>
+
+      <p class="govuk-body">
+        This service will help you to:
+      </p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>find ways to buy goods or services, approved by DfE</li>
+        <li>get value for money</li>
+        <li>comply with the relevant procurement regulations</li>
+      </ul>
+
+      <p class="govuk-body">
+        Answer a few questions to see approved framework agreements for what you're buying.
+      </p>
+
+      <p class="govuk-body">
+        You’ll then be directed to the framework provider's website where you’ll get more information, and instructions on how to get quotes from suppliers on the framework agreement.
+      </p>
+
+      {{ govukButton({ text: 'Continue', href: locals.frameworkPath }) }}
+
+      <p class="govuk-body">
+        <a href="/list" class="govuk-link">See a list of all frameworks</a>
+      </p>
+    </div>
+  </div>
+{% endblock %}
