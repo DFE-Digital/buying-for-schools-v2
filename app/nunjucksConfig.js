@@ -17,6 +17,7 @@ const nunjucksConfig = app => {
     env.addGlobal("currentUrl", 'https://' + req.get('host') + req.originalUrl)
     env.addGlobal("docStatus", app.locals.db.docStatus)
     env.addGlobal("sessionId", userJourney.readOrCreateSessionId(req, res))
+    env.addGlobal("cookieAccepted", req.cookies["cookie_consent"] == "yes")
     next()
   })
 
