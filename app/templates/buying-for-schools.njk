@@ -12,6 +12,11 @@
 {% extends "template.njk" %}
 
 {% block head %}
+  {% if locals.db.docStatus === 'LIVE' and cookieAccepted %}
+    <!-- Google tag (gtag.js) --> 
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KVZ65JKFY6"></script> 
+    <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-KVZ65JKFY6'); </script>
+  {% endif %} 
   <meta name="robots" content="noindex, nofollow">
   <link rel="stylesheet" href="/assets/styles/main.css">
 {% endblock %}
@@ -136,30 +141,5 @@
 {% block bodyEnd %}
   <script src="/assets/all.js"></script>
   <script src="/assets/frameworks.js" id="mainscript"></script>
-  <!-- Google Tag Manager -->
-  <script>
-    (function(w,d,s,l,i){
-      var gaSet = false;
-      window.setGA = function(){
-        if(gaSet) {
-          return;
-        }
-        w[l]=w[l]||[];w[l].push({'gtm.start':
-        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        gaSet = true;
-      };
-
-      if (window.cookie_consent) {
-        setGA();
-      }
-    })(window,document,'script','dataLayer','GTM-N7JPPRB');
-  </script>
-  <!-- End Google Tag Manager -->
-  <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N7JPPRB"
-  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
 {% endblock %}
 
