@@ -1,0 +1,8 @@
+{% macro ghbsFeedbackHref() %}
+  {% set prodLink = "https://www.get-help-buying-for-schools.service.gov.uk/customer_satisfaction_surveys/new?" %}
+  {% set stagingLink = "https://staging.get-help-buying-for-schools.service.gov.uk/customer_satisfaction_surveys/new?" %}
+  {% set service = "service=find_a_framework" %}
+  {% set source = "source=banner_link" %}
+
+  {{ (prodLink if docStatus == "LIVE" else stagingLink) + service + "&" + source }}
+{% endmacro %}
