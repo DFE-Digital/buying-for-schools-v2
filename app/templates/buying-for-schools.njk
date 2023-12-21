@@ -8,6 +8,7 @@
 {% from "error-summary/macro.njk" import govukErrorSummary %}
 {% from "footer/macro.njk" import govukFooter %}
 {% from "macros/ghbs-link.njk" import requestSupportPageHref %}
+{% from "macros/ghbs-feedback-link.njk" import ghbsFeedbackHref %}
 
 {% extends "template.njk" %}
 
@@ -114,7 +115,7 @@
     tag: {
       text: "beta"
     },
-    html: 'This is a new service – your <a class="govuk-link" href="mailto:schools.digital@education.gov.uk?subject=Feedback:%20Find%20a DfE%20approved%20framework%20for%20your%20school">feedback</a> will help us to improve it.'
+    html: "This is a new service – your <a class='govuk-link' href='" + ghbsFeedbackHref() + "'>feedback</a> will help us to improve it."
   }) }}
 {% endblock %}
 
