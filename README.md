@@ -8,6 +8,13 @@ This help is given via a decision tree navigation which asks simple multiple cho
 
 This is a NodeJS/Express based Azure WebApp with a Mongo (Cosmos) database and templates rendered by Nunjucks.
 
+## Deployment
+
+1. The docker image will be built automatically on push to `master`. It can be run manually [uisng the build-and-push-docker-image action](https://github.com/DFE-Digital/buying-for-schools-v2/actions/workflows/build-and-push-docker-image.yml).
+2. Inspect the [package repository](https://github.com/DFE-Digital/buying-for-schools-v2/pkgs/container/buying-for-schools-v2) to see if your new docker image has been pushed.
+3. Go to the [releases section in Azure DevOps](https://dfe-ssp.visualstudio.com/S107-Find-a-DfE-approved-framework-for-your-school/_release?_a=releases&view=mine&definitionId=19) and select the environment you wish to deploy to. - Either V2 PUBLIC Dev, V2 PUBLIC Test or V2 PUBLIC Prod.
+4. Click "create release" and populate the `Docker_Build_Tag` variable with the tag of the docker image you wish to deploy. i.e. If you wish to deploy `2edddb0` fill in `Docker_Build_Tag` as `2edddb0`.
+
 
 ## Install ##
 
@@ -75,4 +82,3 @@ The connection string to use to connect to a mongo database, it should be as per
 Options are ` DRAFT ` or ` LIVE `, defaults to ` LIVE `.
 
 This setting affects which DB record is used in this instance of the app, on Production the value should be ` LIVE ` but on a test env it's useful to display the ` DRAFT ` version, in order to gain sign-off on proposed changes before promoting the record to ` LIVE ` and archiving the previous instance.
-
