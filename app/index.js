@@ -54,6 +54,9 @@ routeIntroPages.route(app)
 const frameworkRoutes = require('./routeFrameworks')
 frameworkRoutes.route(app)
 
+const feedbackRoutes = require('./routeFeedback')
+feedbackRoutes.route(app)
+
 app.locals.db = require('./dbTree/db')({
   connectionString: process.env.MONGO_READONLY,
   docStatus: process.env.DOC_STATUS || 'LIVE'

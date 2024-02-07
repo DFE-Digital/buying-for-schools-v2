@@ -22,7 +22,7 @@
       <li>pre-agreed terms and conditions</li>
     </ul>
 
-    {{ results.button(providerShort, url) }}
+    {{ results.button(providerShort, url if skipSurvey else feedbackUrl) }}
 
     {% include "summary.njk" %}
 
