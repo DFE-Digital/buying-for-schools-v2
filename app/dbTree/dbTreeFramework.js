@@ -13,7 +13,8 @@ const dbTreeFramework = app => (framework, summary = '') => {
     body: marked(body),
     title: framework.title,
     url: framework.url,
-    pageTitle: framework.title
+    pageTitle: framework.title,
+    feedbackUrl: `/feedback/${framework.ref}`
   })
   return renderedResult
 }

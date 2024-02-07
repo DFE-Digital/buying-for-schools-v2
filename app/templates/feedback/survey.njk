@@ -1,0 +1,37 @@
+{% extends "buying-for-schools.njk" %}
+{% from "radios/macro.njk" import govukRadios %}
+{% from "textarea/macro.njk" import govukTextarea %}
+{% import "macros/results.njk" as results %}
+
+{% block content %}
+{% if err %}
+  {{ govukErrorSummary(err) }}
+{% endif %}
+
+<h1 class="govuk-heading-l">Before you go</h1>
+<p class="govuk-body">Please could you let us know how easy it was to use this form? Your feedback helps us make our service better.</p>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form action="{{ currentUrl }}" method="post">
+      {{ govukRadios(easyToUseRatingRadioOptions) }}
+
+      {{ govukTextarea({
+        name: "improvements",
+        id: "improvements",
+        rows: "5",
+        label: {
+          text: "How could we improve this form?",
+          classes: "govuk-label--s",
+          isPageHeading: false
+        }
+      }) }}
+
+      <div class="govuk-button-group">
+        {{ govukButton({ text: "Send feedback", type: "submit"}) }}
+        <a href="{{skipUrl}}" class="govuk-link govuk-link--no-visited-state">Skip survey</a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

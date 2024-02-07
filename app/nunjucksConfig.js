@@ -18,6 +18,7 @@ const nunjucksConfig = app => {
     env.addGlobal("docStatus", app.locals.db.docStatus)
     env.addGlobal("sessionId", userJourney.readOrCreateSessionId(req, res))
     env.addGlobal("cookieAccepted", req.cookies["cookie_consent"] == "yes")
+    env.addGlobal("skipSurvey", req.cookies.skipSurvey == "true")
     next()
   })
 
