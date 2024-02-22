@@ -7,8 +7,8 @@ const nunjucksConfig = app => {
   var env = nunjucks.configure([
     path.resolve(__dirname, './dbTree/templates'),
     path.resolve(__dirname, './templates'),
-    path.resolve(__dirname, '../node_modules/govuk-frontend/govuk'),
-    path.resolve(__dirname, '../node_modules/govuk-frontend/govuk/components/')
+    path.resolve(__dirname, '../node_modules/govuk-frontend/dist/govuk'),
+    path.resolve(__dirname, '../node_modules/govuk-frontend/dist/govuk/components/')
   ], {
     autoescape: true
   })
