@@ -30,7 +30,7 @@
     "gulp": "^4.0.2",
     "gulp-cli": "^2.2.0",
     "gulp-copy": "^4.0.1",
-    "marked": "^0.7.0",
+    "marked": "^4.0.10",
     "mkdirp": "^0.5.1",
     "moment": "^2.24.0",
     "mongodb": "^3.3.0-beta2",
