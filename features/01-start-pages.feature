@@ -7,4 +7,6 @@ Feature: Start pages
       | Heading | Find a DfE approved framework agreement for your school |
     And have links
       | Continue | /find |
-      | See a list of all frameworks | /list |
+      | See a list of all frameworks                                                | /list |
+      | See a list of all frameworks                                                | /list |
+      | Register for e-learning and information about the new procurement Act 2023  | https://buyingforschools.blog.gov.uk/2024/11/19/update-for-schools-and-trusts-on-procurement-act-2023-are-you-ready/ |

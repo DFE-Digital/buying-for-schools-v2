@@ -32,9 +32,10 @@ Feature: Buying books
       | Heading        | Books and related materials |
       | Recommendation | Based on your answers, we think you should use the Eastern Shires Purchasing Organisation (ESPO) framework. |
     And have links
-      | Visit the ESPO website                                                  | https://www.espo.org/Pages/Books-for-schools-framework-376E-guide |
-      | Buying for schools guidance                                             | https://www.gov.uk/guidance/buying-for-schools |
-      | Start again                                                             | /find |
-      | Change What are you buying?                                             | /find/type |
-      | Change What goods do you need?                                          | /find/type/buying/what |
-      | Change What goods are you looking for in books and related materials?   | /find/type/buying/what/books-media/class-library |
+      | Visit the ESPO website                                                      | https://www.espo.org/Pages/Books-for-schools-framework-376E-guide |
+      | Buying for schools guidance                                                 | https://www.gov.uk/guidance/buying-for-schools |
+      | Register for e-learning and information about the new procurement Act 2023  | https://buyingforschools.blog.gov.uk/2024/11/19/update-for-schools-and-trusts-on-procurement-act-2023-are-you-ready/ |
+      | Start again                                                                 | /find |
+      | Change What are you buying?                                                 | /find/type |
+      | Change What goods do you need?                                              | /find/type/buying/what |
+      | Change What goods are you looking for in books and related materials?       | /find/type/buying/what/books-media/class-library |
