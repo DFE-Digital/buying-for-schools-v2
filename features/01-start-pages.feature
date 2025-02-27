@@ -9,4 +9,4 @@ Feature: Start pages
       | Continue | /find |
       | See a list of all frameworks                                                | /list |
       | See a list of all frameworks                                                | /list |
-      | Register for e-learning and information about the new procurement Act 2023  | https://buyingforschools.blog.gov.uk/2024/11/19/update-for-schools-and-trusts-on-procurement-act-2023-are-you-ready/ |
+      | Register for e-learning and information about the new Procurement Act 2023  | https://buyingforschools.blog.gov.uk/2024/11/19/update-for-schools-and-trusts-on-procurement-act-2023-are-you-ready/ |
